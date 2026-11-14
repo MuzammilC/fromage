@@ -1,0 +1,13 @@
+{
+  "name": "fromage",
+  "private": true,
+  "packageManager": "pnpm@10.34.9",
+  "scripts": {
+    "lint": "pnpm -r lint && prettier --check . && uv run ruff check . && uv run ruff format --check .",
+    "test": "pnpm -r test",
+    "format": "prettier --write . && uv run ruff format ."
+  },
+  "devDependencies": {
+    "prettier": "^3"
+  }
+}
