@@ -1,0 +1,9 @@
+node_modules
+.next
+pnpm-lock.yaml
+uv.lock
+.venv
+.ruff_cache
+.pytest_cache
+apps/web/AGENTS.md
+docs
