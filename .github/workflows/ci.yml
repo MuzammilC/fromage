@@ -23,3 +23,15 @@ jobs:
       - run: pnpm --filter web typecheck
       - run: pnpm test
       - run: uv run --all-packages pytest
+
+  supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - run: supabase start -x realtime,storage-api,imgproxy,edge-runtime,logflare,vector,studio,postgres-meta
+      - run: supabase db reset
+      - run: supabase test db
+      - run: scripts/check-unverified-login.sh
