@@ -3,7 +3,10 @@ name = "fromage-grader"
 version = "0.1.0"
 description = "Fromage grader"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = ["fromage-exam-definition"]
+
+[tool.uv.sources]
+fromage-exam-definition = { workspace = true }
 
 [build-system]
 requires = ["hatchling"]

@@ -5,9 +5,13 @@
   "scripts": {
     "lint": "pnpm -r lint && prettier --check . && uv run ruff check . && uv run ruff format --check .",
     "test": "pnpm -r test",
-    "format": "prettier --write . && uv run ruff format ."
+    "format": "prettier --write . && uv run ruff format .",
+    "codegen": "node scripts/codegen.mjs",
+    "codegen:check": "pnpm codegen && git diff --exit-code -- apps/web/lib/exam-definition packages/exam_definition/src && test -z \"$(git ls-files --others --exclude-standard -- apps/web/lib/exam-definition packages/exam_definition/src)\""
   },
   "devDependencies": {
+    "@apidevtools/json-schema-ref-parser": "^16.0.8",
+    "json-schema-to-zod": "^2.8.1",
     "prettier": "^3"
   }
 }

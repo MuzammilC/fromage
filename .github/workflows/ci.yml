@@ -17,8 +17,9 @@ jobs:
           cache: pnpm
       - uses: astral-sh/setup-uv@v5
       - run: pnpm install --frozen-lockfile
-      - run: uv sync --frozen
+      - run: uv sync --frozen --all-packages
+      - run: pnpm codegen:check
       - run: pnpm lint
       - run: pnpm --filter web typecheck
       - run: pnpm test
-      - run: uv run pytest
+      - run: uv run --all-packages pytest
