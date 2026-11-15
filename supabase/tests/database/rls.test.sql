@@ -36,9 +36,15 @@ select throws_ok(
   $$insert into public.sessions (owner_id, exam_definition_ref, mode, medium)
     values ('aaaaaaaa-0000-0000-0000-000000000001', 'delf-a2@1', 'mock', 'text')$$,
   '42501', null, 'Bob cannot create a Session owned by Alice');
-select is((with u as (update public.sessions set status = 'abandoned' where id = 'aaaaaaaa-1111-0000-0000-000000000001' returning 1) select count(*)::int from u), 0, 'Bob cannot update Alice''s Session');
-select is((with d as (delete from public.sessions where id = 'aaaaaaaa-1111-0000-0000-000000000001' returning 1) select count(*)::int from d), 0, 'Bob cannot delete Alice''s Session');
-select is((with u as (update public.profiles set display_name = 'hacked' where id = 'aaaaaaaa-0000-0000-0000-000000000001' returning 1) select count(*)::int from u), 0, 'Bob cannot update Alice''s profile');
+select is_empty(
+  $$update public.sessions set status = 'abandoned' where id = 'aaaaaaaa-1111-0000-0000-000000000001' returning 1$$,
+  'Bob cannot update Alice''s Session');
+select is_empty(
+  $$delete from public.sessions where id = 'aaaaaaaa-1111-0000-0000-000000000001' returning 1$$,
+  'Bob cannot delete Alice''s Session');
+select is_empty(
+  $$update public.profiles set display_name = 'hacked' where id = 'aaaaaaaa-0000-0000-0000-000000000001' returning 1$$,
+  'Bob cannot update Alice''s profile');
 
 -- Transcripts are read-only for Users, even in their own Session.
 select throws_ok(
