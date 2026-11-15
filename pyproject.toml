@@ -1,8 +1,8 @@
 [tool.uv.workspace]
-members = ["apps/agent", "apps/grader"]
+members = ["apps/agent", "apps/grader", "packages/exam_definition"]
 
 [tool.uv]
-dev-dependencies = ["pytest>=8", "ruff>=0.8"]
+dev-dependencies = ["pytest>=8", "ruff>=0.8", "datamodel-code-generator>=0.26"]
 
 [tool.ruff]
 line-length = 100

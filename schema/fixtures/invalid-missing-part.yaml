@@ -1,0 +1,27 @@
+id: fixture-a2
+version: 1
+level: A2
+parts:
+  - key: guided_interview
+    prep_time_seconds: 0
+    target_duration_seconds: 120
+    turn_mode: interactive
+grid:
+  - key: guided_interview_achievement
+    scope: { kind: part, part: guided_interview }
+    band_points: [0, 1, 2.5, 4]
+  - key: monologue_achievement
+    scope: { kind: part, part: monologue }
+    band_points: [0, 1, 3, 5]
+  - key: lexique
+    scope: { kind: global }
+    band_points: [0, 1, 3, 5]
+  - key: morphosyntaxe
+    scope: { kind: global }
+    band_points: [0, 1, 3, 5]
+  - key: phonologie
+    scope: { kind: global }
+    band_points: [0, 1, 3, 6]
+provenance:
+  source_url: https://example.org/fixture
+  retrieved_on: "2026-11-14"
