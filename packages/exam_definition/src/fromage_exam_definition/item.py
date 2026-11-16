@@ -37,9 +37,15 @@ def parse_item(data: Any, definition: ExamDefinition | None = None) -> Item:
                 f"the Exam Definition it is checked against, {expected_ref!r}"
             )
         part_keys = [part.key for part in definition.parts]
-        if variant.part_key.root not in part_keys:
+        part = next((p for p in definition.parts if p.key == variant.part_key.root), None)
+        if part is None:
             problems.append(
                 f"part_key {variant.part_key.root!r} is not a Part of {expected_ref!r}: {part_keys}"
+            )
+        elif part.item_type is not None and part.item_type.value != variant.type:
+            problems.append(
+                f"Item type {variant.type!r} does not fit Part {part.key!r}, "
+                f"which takes {part.item_type.value!r} Items"
             )
     if problems:
         raise ItemError("Invalid Item:\n" + "\n".join(problems))

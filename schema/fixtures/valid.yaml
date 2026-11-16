@@ -3,13 +3,14 @@ version: 1
 level: A2
 parts:
   - key: guided_interview
-    prep_time_seconds: 0
-    target_duration_seconds: 120
+    target_duration_seconds: { min: 120, max: 120 }
     turn_mode: interactive
   - key: monologue
-    prep_time_seconds: 600
-    target_duration_seconds: 150
+    target_duration_seconds: { min: 150, max: 150 }
     turn_mode: listen_only
+prep_periods:
+  - time_seconds: 600
+    parts: [monologue]
 grid:
   - key: guided_interview_achievement
     scope: { kind: part, part: guided_interview }

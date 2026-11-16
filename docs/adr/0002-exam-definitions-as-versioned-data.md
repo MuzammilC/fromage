@@ -11,11 +11,16 @@ Both the TypeScript web app and the Python agent and Grader read the same defini
 - `apps/web/lib/exam-definition` holds the generated zod types and the TypeScript validator.
 - `pnpm codegen` regenerates both sets of types from the schema. `pnpm codegen:check` runs in CI and fails if the generated files are stale.
 
-JSON Schema cannot express some rules: the top-Band Band Points must add up to 25, Band Points start at 0 and never decrease, a Criterion scoped to a Part must name a Part that exists, keys are unique, and the retrieval date must be a real date. These are written by hand in each validator, so a new rule needs an edit in both the TypeScript and the Python validator.
+JSON Schema cannot express some rules: the top-Band Band Points must add up to 25, Band Points start at 0 and never decrease, a Criterion scoped to a Part must name a Part that exists, keys are unique, a duration range's min is at most its max, Prep Time covers only Parts that exist and no Part twice, and the retrieval date must be a real date. When an Item is checked against its Exam Definition, it must point at that `id@version`, name a Part that exists, and be of the `item_type` that Part takes. These are written by hand in each validator, so a new rule needs an edit in both the TypeScript and the Python validator.
+
+## How timings and Items attach to Parts
+
+- A Part's `target_duration_seconds` is a `{min, max}` range. Use the same number for both when the exam gives one approximate time.
+- Prep Time is a list of `prep_periods`, each with a time and the Parts it covers, because one period can be shared (A2 has one 10-minute period for Parts 2 and 3). A Part with no period has no Prep Time.
+- A Part's optional `item_type` says which Item type it takes. When it is set, an Item checked against the definition must match it.
 
 ## Not built yet
 
 - The real DELF A1 Exam Definition. The A2 one is `content/exams/delf-a2-tp.yaml`.
-- Item types for A1 (Cards, role-play with a Wallet). `schema/item.schema.json` covers the three A2 types: question bank, monologue subject, interaction situation.
-- A check that an Item's type fits its Part. Items only have to name a Part that exists in their Exam Definition.
+- Item types for A1 (Cards, role-play with a Wallet). `schema/item.schema.json` covers the three A2 types: question bank, monologue subject, interaction situation. The A1 Parts will need `item_type` values for them.
 - A guard against the two validators drifting apart, such as shared test cases that both run.

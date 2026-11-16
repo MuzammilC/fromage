@@ -15,6 +15,11 @@
       "minItems": 1,
       "items": { "$ref": "#/$defs/Part" }
     },
+    "prep_periods": {
+      "description": "Prep Time before the live Parts. Omit when the exam has none.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/PrepPeriod" }
+    },
     "grid": {
       "type": "array",
       "minItems": 1,
@@ -26,17 +31,43 @@
     "Part": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "key",
-        "prep_time_seconds",
-        "target_duration_seconds",
-        "turn_mode"
-      ],
+      "required": ["key", "target_duration_seconds", "turn_mode"],
       "properties": {
         "key": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
-        "prep_time_seconds": { "type": "integer", "minimum": 0 },
-        "target_duration_seconds": { "type": "integer", "minimum": 1 },
-        "turn_mode": { "enum": ["interactive", "listen_only"] }
+        "target_duration_seconds": { "$ref": "#/$defs/DurationRange" },
+        "turn_mode": { "enum": ["interactive", "listen_only"] },
+        "item_type": {
+          "description": "The one Item type a Candidate is given in this Part.",
+          "enum": [
+            "question_bank",
+            "monologue_subject",
+            "interaction_situation"
+          ]
+        }
+      }
+    },
+    "DurationRange": {
+      "description": "Target live time in seconds. Use the same number for min and max when the exam gives a single approximate time.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min", "max"],
+      "properties": {
+        "min": { "type": "integer", "minimum": 1 },
+        "max": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "PrepPeriod": {
+      "description": "One timed Prep Time before the live Parts, shared by the Parts it covers.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["time_seconds", "parts"],
+      "properties": {
+        "time_seconds": { "type": "integer", "minimum": 1 },
+        "parts": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" }
+        }
       }
     },
     "Criterion": {

@@ -29,6 +29,30 @@ describe("the DELF A2 Exam Definition", () => {
     ]);
   });
 
+  it("has one shared Prep Time for Parts 2 and 3", () => {
+    expect(a2().prep_periods).toEqual([
+      {
+        time_seconds: 600,
+        parts: ["monologue_suivi", "exercice_en_interaction"],
+      },
+    ]);
+  });
+
+  it("gives the interaction Part a 3 to 4 minute range", () => {
+    expect(a2().parts[2].target_duration_seconds).toEqual({
+      min: 180,
+      max: 240,
+    });
+  });
+
+  it("makes each Part accept one Item type", () => {
+    expect(a2().parts.map((p) => p.item_type)).toEqual([
+      "question_bank",
+      "monologue_subject",
+      "interaction_situation",
+    ]);
+  });
+
   it("uses the A2 Band Points", () => {
     const points = Object.fromEntries(
       a2().grid.map((c) => [c.key, c.band_points]),
@@ -84,6 +108,16 @@ describe("parseItem", () => {
     const data = fixture("valid-question-bank.yaml") as { part_key: string };
     data.part_key = "dialogue_simule";
     expect(() => parseItem(data, a2())).toThrow(/dialogue_simule.*Part/);
+  });
+
+  it("rejects an Item of the wrong type for its Part", () => {
+    const data = fixture("valid-monologue-subject.yaml") as {
+      part_key: string;
+    };
+    data.part_key = "entretien_dirige";
+    expect(() => parseItem(data, a2())).toThrow(
+      /monologue_subject.*entretien_dirige.*question_bank/,
+    );
   });
 
   it("rejects an Item that points at another Exam Definition", () => {

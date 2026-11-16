@@ -88,6 +88,33 @@ def test_item_for_missing_part_is_rejected(a2):
         parse_item(data, a2)
 
 
+def test_a2_prep_time_is_one_period_covering_parts_two_and_three(a2):
+    assert len(a2.prep_periods) == 1
+    period = a2.prep_periods[0]
+    assert period.time_seconds == 600
+    assert [p.root for p in period.parts] == ["monologue_suivi", "exercice_en_interaction"]
+
+
+def test_a2_interaction_target_is_three_to_four_minutes(a2):
+    target = a2.parts[2].target_duration_seconds
+    assert (target.min, target.max) == (180, 240)
+
+
+def test_a2_parts_accept_one_item_type_each(a2):
+    assert [p.item_type.value for p in a2.parts] == [
+        "question_bank",
+        "monologue_subject",
+        "interaction_situation",
+    ]
+
+
+def test_item_of_the_wrong_type_for_its_part_is_rejected(a2):
+    data = fixture("valid-monologue-subject.yaml")
+    data["part_key"] = "entretien_dirige"
+    with pytest.raises(ItemError, match=r"monologue_subject.*entretien_dirige.*question_bank"):
+        parse_item(data, a2)
+
+
 def test_item_pointing_at_another_definition_is_rejected(a2):
     data = fixture("valid-question-bank.yaml")
     data["exam_definition"] = "delf-a2-tp@2"

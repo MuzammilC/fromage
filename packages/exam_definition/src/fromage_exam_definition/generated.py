@@ -23,14 +23,30 @@ class TurnMode(Enum):
     listen_only = "listen_only"
 
 
-class Part(BaseModel):
+class ItemType(Enum):
+    question_bank = "question_bank"
+    monologue_subject = "monologue_subject"
+    interaction_situation = "interaction_situation"
+
+
+class DurationRange(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    key: Annotated[str, Field(pattern="^[a-z0-9]+(_[a-z0-9]+)*$")]
-    prep_time_seconds: Annotated[int, Field(ge=0)]
-    target_duration_seconds: Annotated[int, Field(ge=1)]
-    turn_mode: TurnMode
+    min: Annotated[int, Field(ge=1)]
+    max: Annotated[int, Field(ge=1)]
+
+
+class Part1(RootModel[str]):
+    root: Annotated[str, Field(pattern="^[a-z0-9]+(_[a-z0-9]+)*$")]
+
+
+class PrepPeriod(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    time_seconds: Annotated[int, Field(ge=1)]
+    parts: Annotated[list[Part1], Field(min_length=1)]
 
 
 class Descriptors(BaseModel):
@@ -67,6 +83,19 @@ class SourceLink(BaseModel):
     )
     label: Annotated[str, Field(min_length=1)]
     url: AnyUrl
+
+
+class Part(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    key: Annotated[str, Field(pattern="^[a-z0-9]+(_[a-z0-9]+)*$")]
+    target_duration_seconds: DurationRange
+    turn_mode: TurnMode
+    item_type: Annotated[
+        ItemType | None,
+        Field(description="The one Item type a Candidate is given in this Part."),
+    ] = None
 
 
 class Criterion(BaseModel):
@@ -106,5 +135,9 @@ class ExamDefinition(BaseModel):
     version: Annotated[int, Field(ge=1)]
     level: Level
     parts: Annotated[list[Part], Field(min_length=1)]
+    prep_periods: Annotated[
+        list[PrepPeriod] | None,
+        Field(description="Prep Time before the live Parts. Omit when the exam has none."),
+    ] = None
     grid: Annotated[list[Criterion], Field(min_length=1)]
     provenance: Provenance

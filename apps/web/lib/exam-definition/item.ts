@@ -50,10 +50,16 @@ export function parseItem(data: unknown, definition?: ExamDefinition): Item {
           `the Exam Definition it is checked against, '${expectedRef}'`,
       );
     }
-    const partKeys = definition.parts.map((p) => p.key);
-    if (!partKeys.includes(item.part_key)) {
+    const part = definition.parts.find((p) => p.key === item.part_key);
+    if (!part) {
+      const partKeys = definition.parts.map((p) => p.key);
       problems.push(
         `part_key '${item.part_key}' is not a Part of '${expectedRef}': [${partKeys.join(", ")}]`,
+      );
+    } else if (part.item_type && part.item_type !== item.type) {
+      problems.push(
+        `Item type '${item.type}' does not fit Part '${part.key}', ` +
+          `which takes '${part.item_type}' Items`,
       );
     }
   }

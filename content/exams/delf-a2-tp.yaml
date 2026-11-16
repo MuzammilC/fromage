@@ -4,19 +4,23 @@ id: delf-a2-tp
 version: 1
 level: A2
 parts:
-  # Prep Time is one 10-minute period before Parts 2 and 3, so it sits on the first Part it serves.
+  # The exam gives Parts 1 and 2 as approximate times (about 1 min 30 and 2 min), so min and max match.
   - key: entretien_dirige
-    prep_time_seconds: 0
-    target_duration_seconds: 90
+    target_duration_seconds: { min: 90, max: 90 }
     turn_mode: interactive
+    item_type: question_bank
   - key: monologue_suivi
-    prep_time_seconds: 600
-    target_duration_seconds: 120
+    target_duration_seconds: { min: 120, max: 120 }
     turn_mode: listen_only
+    item_type: monologue_subject
   - key: exercice_en_interaction
-    prep_time_seconds: 0
-    target_duration_seconds: 210 # the exam allows 3 to 4 minutes
+    target_duration_seconds: { min: 180, max: 240 }
     turn_mode: interactive
+    item_type: interaction_situation
+# One 10-minute Prep Time before the live test, shared by Parts 2 and 3.
+prep_periods:
+  - time_seconds: 600
+    parts: [monologue_suivi, exercice_en_interaction]
 grid:
   - key: entretien_dirige
     scope: { kind: part, part: entretien_dirige }

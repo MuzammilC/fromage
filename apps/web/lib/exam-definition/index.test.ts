@@ -50,4 +50,31 @@ describe("parseExamDefinition", () => {
       /retrieved_on.*not a real date/,
     );
   });
+
+  type Mutable = {
+    parts: { target_duration_seconds: { min: number; max: number } }[];
+    prep_periods: { time_seconds: number; parts: string[] }[];
+  };
+
+  it("rejects a Prep Time that covers a Part that does not exist", () => {
+    const data = fixture("valid.yaml") as Mutable;
+    data.prep_periods[0].parts = ["role_play"];
+    expect(() => parseExamDefinition(data)).toThrow(/Prep.*'role_play'/);
+  });
+
+  it("rejects a Part covered by two Prep Times", () => {
+    const data = fixture("valid.yaml") as Mutable;
+    data.prep_periods.push({ time_seconds: 60, parts: ["monologue"] });
+    expect(() => parseExamDefinition(data)).toThrow(
+      /Part 'monologue'.*more than one Prep/,
+    );
+  });
+
+  it("rejects a duration range whose min is above its max", () => {
+    const data = fixture("valid.yaml") as Mutable;
+    data.parts[0].target_duration_seconds = { min: 200, max: 100 };
+    expect(() => parseExamDefinition(data)).toThrow(
+      /guided_interview.*min 200.*max 100/,
+    );
+  });
 });
