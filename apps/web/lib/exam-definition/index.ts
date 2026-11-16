@@ -31,6 +31,31 @@ export function parseExamDefinition(data: unknown): ExamDefinition {
     problems.push(`Duplicate Criterion key '${key}'`);
   }
 
+  for (const part of definition.parts) {
+    const { min, max } = part.target_duration_seconds;
+    if (min > max) {
+      problems.push(
+        `Part '${part.key}': target duration min ${min} is above max ${max}`,
+      );
+    }
+  }
+
+  const covered: string[] = [];
+  for (const period of definition.prep_periods ?? []) {
+    for (const part of period.parts) {
+      if (!partKeys.includes(part)) {
+        problems.push(
+          `Prep Time covers Part '${part}', ` +
+            `which is not one of the Parts: [${partKeys.join(", ")}]`,
+        );
+      }
+      covered.push(part);
+    }
+  }
+  for (const key of duplicates(covered)) {
+    problems.push(`Part '${key}' is covered by more than one Prep Time`);
+  }
+
   for (const criterion of definition.grid) {
     const { scope, band_points: points } = criterion;
     if (scope.kind === "part" && !partKeys.includes(scope.part)) {
@@ -75,7 +100,7 @@ function topBandPoints(bandPoints: number[]): number {
   return bandPoints[bandPoints.length - 1];
 }
 
-function isRealDate(value: string): boolean {
+export function isRealDate(value: string): boolean {
   const date = new Date(`${value}T00:00:00Z`);
   return !Number.isNaN(date.getTime()) && date.toISOString().startsWith(value);
 }

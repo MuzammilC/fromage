@@ -1,0 +1,16 @@
+type: question_bank
+id: a2-entretien-famille-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics: [famille, logement]
+status: draft
+version: 1
+generation:
+  model: example-model
+  prompt_version: items-v1
+  date: "2026-11-14"
+questions:
+  - Pouvez-vous vous présenter en quelques mots ?
+  - Avec qui habitez-vous ?
+  - Comment est votre logement ?
+  - Qu'est-ce que vous aimez faire le week-end ?

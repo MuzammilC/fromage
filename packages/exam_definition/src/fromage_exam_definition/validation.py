@@ -37,6 +37,26 @@ def _check_semantics(definition: ExamDefinition) -> None:
     criterion_keys = [criterion.key for criterion in definition.grid]
     problems += [f"Duplicate Criterion key {k!r}" for k in sorted(_duplicates(criterion_keys))]
 
+    for part in definition.parts:
+        target = part.target_duration_seconds
+        if target.min > target.max:
+            problems.append(
+                f"Part {part.key!r}: target duration min {target.min} is above max {target.max}"
+            )
+
+    covered: list[str] = []
+    for period in definition.prep_periods or []:
+        for covered_part in (p.root for p in period.parts):
+            if covered_part not in part_keys:
+                problems.append(
+                    f"Prep Time covers Part {covered_part!r}, "
+                    f"which is not one of the Parts: {part_keys}"
+                )
+            covered.append(covered_part)
+    problems += [
+        f"Part {k!r} is covered by more than one Prep Time" for k in sorted(_duplicates(covered))
+    ]
+
     for criterion in definition.grid:
         scope = criterion.scope.root
         if scope.kind == "part" and scope.part not in part_keys:
@@ -57,7 +77,7 @@ def _check_semantics(definition: ExamDefinition) -> None:
             f"The Band Points of the top Band must add up to {GRID_TOTAL_POINTS}, got {total:g}"
         )
 
-    if not _is_real_date(definition.provenance.retrieved_on):
+    if not is_real_date(definition.provenance.retrieved_on):
         problems.append(
             f"provenance.retrieved_on {definition.provenance.retrieved_on!r} is not a real date"
         )
@@ -71,7 +91,7 @@ def _top_band_points(band_points: list[float]) -> float:
     return band_points[-1]
 
 
-def _is_real_date(value: str) -> bool:
+def is_real_date(value: str) -> bool:
     try:
         date.fromisoformat(value)
     except ValueError:

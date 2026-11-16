@@ -1,0 +1,76 @@
+# DELF A2 tout public, speaking test. Built from docs/research/delf-speaking-coach.md §A.1-A.3.
+# Descriptors are paraphrased in our own words. Do not paste text from the FEI sheets here.
+id: delf-a2-tp
+version: 1
+level: A2
+parts:
+  # The exam gives Parts 1 and 2 as approximate times (about 1 min 30 and 2 min), so min and max match.
+  - key: entretien_dirige
+    target_duration_seconds: { min: 90, max: 90 }
+    turn_mode: interactive
+    item_type: question_bank
+  - key: monologue_suivi
+    target_duration_seconds: { min: 120, max: 120 }
+    turn_mode: listen_only
+    item_type: monologue_subject
+  - key: exercice_en_interaction
+    target_duration_seconds: { min: 180, max: 240 }
+    turn_mode: interactive
+    item_type: interaction_situation
+# One 10-minute Prep Time before the live test, shared by Parts 2 and 3.
+prep_periods:
+  - time_seconds: 600
+    parts: [monologue_suivi, exercice_en_interaction]
+grid:
+  - key: entretien_dirige
+    scope: { kind: part, part: entretien_dirige }
+    band_points: [0, 1, 2.5, 4]
+    descriptors:
+      band_1: Gives very short answers to simple personal questions and often needs them repeated or rephrased.
+      band_2: Introduces themselves and answers questions about family, home and free time with simple sentences.
+      band_3: Adds details and examples unprompted, and talks about daily life in connected sentences.
+  - key: monologue_suivi
+    scope: { kind: part, part: monologue_suivi }
+    band_points: [0, 1, 2.5, 4]
+    descriptors:
+      band_1: Produces a few disconnected sentences on the subject and stops quickly or relies on the Examiner's questions.
+      band_2: Speaks on the subject in simple linked sentences and answers follow-up questions on it.
+      band_3: Speaks coherently with connectors, tells past events or plans with short justifications, and keeps going without help.
+  - key: exercice_en_interaction
+    scope: { kind: part, part: exercice_en_interaction }
+    band_points: [0, 1, 2.5, 4]
+    descriptors:
+      band_1: Reacts only with heavy guidance, handles the situation partly, and the social exchange is minimal.
+      band_2: Completes the everyday task with some help and uses basic greetings and politeness.
+      band_3: Resolves the situation with fitting speech acts, takes initiative, and adopts an appropriate register.
+  - key: lexique
+    scope: { kind: global }
+    band_points: [0, 1, 3, 5]
+    descriptors:
+      band_1: Vocabulary is too limited for the everyday topics, with frequent gaps and isolated words.
+      band_2: Has enough common vocabulary for familiar topics, with some repetition.
+      band_3: Uses a varied everyday vocabulary and finds ways around a missing word.
+  - key: morphosyntaxe
+    scope: { kind: global }
+    band_points: [0, 1, 2.5, 4]
+    descriptors:
+      band_1: Basic structures are often wrong or missing, which gets in the way of understanding.
+      band_2: Uses simple structures and common tenses with errors that rarely block meaning.
+      band_3: Controls simple structures and common tenses fairly well, with only occasional slips.
+  - key: phonologie
+    scope: { kind: global }
+    band_points: [0, 1, 2.5, 4]
+    descriptors:
+      band_1: Often hard to follow, so the listener must work to understand.
+      band_2: Understandable despite an accent and some mispronounced sounds, with occasional repetition needed.
+      band_3: Clearly intelligible throughout, with mostly correct pronunciation and intonation.
+provenance:
+  source_url: https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a2
+  retrieved_on: "2026-11-14"
+  links:
+    - label: FEI A2 scoring grid (speaking)
+      url: https://www.france-education-international.fr/document/grille-po-a2
+    - label: FEI A2 performance descriptors (speaking)
+      url: https://www.france-education-international.fr/document/descript-perf-po-a2
+    - label: FEI A2 examiner document
+      url: https://www.france-education-international.fr/document/delf-a2-tp-examinateur-ind

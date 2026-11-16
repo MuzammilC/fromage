@@ -11,13 +11,44 @@ export const examDefinitionSchema = z
         z
           .object({
             key: z.string().regex(new RegExp("^[a-z0-9]+(_[a-z0-9]+)*$")),
-            prep_time_seconds: z.number().int().gte(0),
-            target_duration_seconds: z.number().int().gte(1),
+            target_duration_seconds: z
+              .object({
+                min: z.number().int().gte(1),
+                max: z.number().int().gte(1),
+              })
+              .strict()
+              .describe(
+                "Target live time in seconds. Use the same number for min and max when the exam gives a single approximate time.",
+              ),
             turn_mode: z.enum(["interactive", "listen_only"]),
+            item_type: z
+              .enum([
+                "question_bank",
+                "monologue_subject",
+                "interaction_situation",
+              ])
+              .describe("The one Item type a Candidate is given in this Part.")
+              .optional(),
           })
           .strict(),
       )
       .min(1),
+    prep_periods: z
+      .array(
+        z
+          .object({
+            time_seconds: z.number().int().gte(1),
+            parts: z
+              .array(z.string().regex(new RegExp("^[a-z0-9]+(_[a-z0-9]+)*$")))
+              .min(1),
+          })
+          .strict()
+          .describe(
+            "One timed Prep Time before the live Parts, shared by the Parts it covers.",
+          ),
+      )
+      .describe("Prep Time before the live Parts. Omit when the exam has none.")
+      .optional(),
     grid: z
       .array(
         z
@@ -41,6 +72,17 @@ export const examDefinitionSchema = z
               .describe(
                 "Points for Band 0, 1, 2 and 3, in order. Starts at 0 and never decreases.",
               ),
+            descriptors: z
+              .object({
+                band_1: z.string().min(1),
+                band_2: z.string().min(1),
+                band_3: z.string().min(1),
+              })
+              .strict()
+              .describe(
+                "Paraphrased performance descriptors for Bands 1 to 3. Never copied from official text.",
+              )
+              .optional(),
           })
           .strict(),
       )
@@ -49,6 +91,14 @@ export const examDefinitionSchema = z
       .object({
         source_url: z.string().url(),
         retrieved_on: z.string().regex(new RegExp("^\\d{4}-\\d{2}-\\d{2}$")),
+        links: z
+          .array(
+            z
+              .object({ label: z.string().min(1), url: z.string().url() })
+              .strict(),
+          )
+          .describe("Further sources the definition was built from.")
+          .optional(),
       })
       .strict(),
   })

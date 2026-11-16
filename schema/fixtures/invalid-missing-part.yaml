@@ -3,8 +3,7 @@ version: 1
 level: A2
 parts:
   - key: guided_interview
-    prep_time_seconds: 0
-    target_duration_seconds: 120
+    target_duration_seconds: { min: 120, max: 120 }
     turn_mode: interactive
 grid:
   - key: guided_interview_achievement
