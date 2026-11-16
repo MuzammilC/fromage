@@ -1,0 +1,17 @@
+type: monologue_subject
+id: a2-monologue-sport-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics: [loisirs, sport]
+status: reviewed
+version: 2
+generation:
+  model: example-model
+  prompt_version: items-v1
+  date: "2026-13-45"
+teacher_reviewed: false
+candidate_brief: Vous parlez du sport que vous pratiquez ou que vous aimeriez pratiquer.
+suggested_angles:
+  - Quel sport et depuis quand
+  - Avec qui et où
+  - Pourquoi vous l'aimez

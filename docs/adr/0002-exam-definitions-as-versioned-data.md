@@ -6,7 +6,7 @@ Both the TypeScript web app and the Python agent and Grader read the same defini
 
 ## Where the schema and generated types live
 
-- `schema/` holds the JSON Schema and the test fixtures (one valid Exam Definition and the invalid ones the tests use). Real Exam Definitions and Items go in `content/`, not here.
+- `schema/` holds the two JSON Schemas (`exam-definition.schema.json`, `item.schema.json`) and the test fixtures (valid and invalid Exam Definitions, and example Items in `fixtures/items/`). An Item points at its Exam Definition as `id@version`. Real Exam Definitions and Items go in `content/`, not here.
 - `packages/exam_definition` is a shared Python package with the generated Pydantic models and the validator. The agent and the Grader both depend on it, so the Python side has one copy of the models.
 - `apps/web/lib/exam-definition` holds the generated zod types and the TypeScript validator.
 - `pnpm codegen` regenerates both sets of types from the schema. `pnpm codegen:check` runs in CI and fails if the generated files are stale.
@@ -15,6 +15,7 @@ JSON Schema cannot express some rules: the top-Band Band Points must add up to 2
 
 ## Not built yet
 
-- The real DELF A1 and A2 Exam Definitions. Only fixtures exist so far.
-- Item files and their schema. Only the Exam Definition has a schema.
+- The real DELF A1 Exam Definition. The A2 one is `content/exams/delf-a2-tp.yaml`.
+- Item types for A1 (Cards, role-play with a Wallet). `schema/item.schema.json` covers the three A2 types: question bank, monologue subject, interaction situation.
+- A check that an Item's type fits its Part. Items only have to name a Part that exists in their Exam Definition.
 - A guard against the two validators drifting apart, such as shared test cases that both run.

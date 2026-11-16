@@ -33,6 +33,15 @@ class Part(BaseModel):
     turn_mode: TurnMode
 
 
+class Descriptors(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    band_1: Annotated[str, Field(min_length=1)]
+    band_2: Annotated[str, Field(min_length=1)]
+    band_3: Annotated[str, Field(min_length=1)]
+
+
 class Scope1(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
@@ -52,12 +61,12 @@ class Scope(RootModel[Scope1 | Scope2]):
     root: Scope1 | Scope2
 
 
-class Provenance(BaseModel):
+class SourceLink(BaseModel):
     model_config = ConfigDict(
         extra="forbid",
     )
-    source_url: AnyUrl
-    retrieved_on: Annotated[str, Field(pattern="^\\d{4}-\\d{2}-\\d{2}$")]
+    label: Annotated[str, Field(min_length=1)]
+    url: AnyUrl
 
 
 class Criterion(BaseModel):
@@ -74,6 +83,19 @@ class Criterion(BaseModel):
             min_length=4,
         ),
     ]
+    descriptors: Descriptors | None = None
+
+
+class Provenance(BaseModel):
+    model_config = ConfigDict(
+        extra="forbid",
+    )
+    source_url: AnyUrl
+    retrieved_on: Annotated[str, Field(pattern="^\\d{4}-\\d{2}-\\d{2}$")]
+    links: Annotated[
+        list[SourceLink] | None,
+        Field(description="Further sources the definition was built from."),
+    ] = None
 
 
 class ExamDefinition(BaseModel):

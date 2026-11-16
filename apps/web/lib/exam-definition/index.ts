@@ -75,7 +75,7 @@ function topBandPoints(bandPoints: number[]): number {
   return bandPoints[bandPoints.length - 1];
 }
 
-function isRealDate(value: string): boolean {
+export function isRealDate(value: string): boolean {
   const date = new Date(`${value}T00:00:00Z`);
   return !Number.isNaN(date.getTime()) && date.toISOString().startsWith(value);
 }

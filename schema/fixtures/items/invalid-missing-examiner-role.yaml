@@ -1,0 +1,26 @@
+type: interaction_situation
+id: a2-interaction-velo-001
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics: [achats, loisirs]
+status: draft
+version: 1
+generation:
+  model: example-model
+  prompt_version: items-v1
+  date: "2026-11-14"
+teacher_reviewed: false
+candidate_brief: >-
+  Vous voulez acheter un vélo d'occasion. Vous allez dans un magasin et
+  vous parlez avec le vendeur.
+examiner_only_data:
+  velos:
+    - { modele: Ville, prix_eur: 180 }
+    - { modele: Route, prix_eur: 320 }
+  garantie_mois: 6
+expected_speech_acts:
+  - saluer
+  - demander le prix
+  - négocier poliment
+  - remercier
+register: formal

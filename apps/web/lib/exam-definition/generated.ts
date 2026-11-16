@@ -41,6 +41,17 @@ export const examDefinitionSchema = z
               .describe(
                 "Points for Band 0, 1, 2 and 3, in order. Starts at 0 and never decreases.",
               ),
+            descriptors: z
+              .object({
+                band_1: z.string().min(1),
+                band_2: z.string().min(1),
+                band_3: z.string().min(1),
+              })
+              .strict()
+              .describe(
+                "Paraphrased performance descriptors for Bands 1 to 3. Never copied from official text.",
+              )
+              .optional(),
           })
           .strict(),
       )
@@ -49,6 +60,14 @@ export const examDefinitionSchema = z
       .object({
         source_url: z.string().url(),
         retrieved_on: z.string().regex(new RegExp("^\\d{4}-\\d{2}-\\d{2}$")),
+        links: z
+          .array(
+            z
+              .object({ label: z.string().min(1), url: z.string().url() })
+              .strict(),
+          )
+          .describe("Further sources the definition was built from.")
+          .optional(),
       })
       .strict(),
   })
