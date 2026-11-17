@@ -11,6 +11,10 @@
     "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.119.0",
+    "livekit-client": "^2.24.1",
+    "livekit-server-sdk": "^2.19.3",
     "next": "16.4.6",
     "react": "19.3.0",
     "react-dom": "19.3.0",
