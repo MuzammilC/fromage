@@ -11,7 +11,8 @@ async function VerificationError({
   const { error } = await searchParams;
   return error === "verification-failed" ? (
     <p role="alert">
-      That verification link did not work. Try logging in, or sign up again.
+      We could not sign you in from that link. If you already verified your
+      email, log in below.
     </p>
   ) : null;
 }

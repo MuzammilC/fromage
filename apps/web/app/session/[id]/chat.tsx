@@ -3,8 +3,13 @@
 import { Room, RoomEvent } from "livekit-client";
 import { useEffect, useRef, useState } from "react";
 
-type Message = { from: string; text: string };
+type Message = { from: "you" | "examiner" | "other"; text: string };
 const TOPIC = "chat";
+const LABELS = {
+  you: "You",
+  examiner: "Examiner",
+  other: "Participant",
+} as const;
 
 export function Chat({ sessionId }: { sessionId: string }) {
   const roomRef = useRef<Room | null>(null);
@@ -21,7 +26,15 @@ export function Chat({ sessionId }: { sessionId: string }) {
 
     room.registerTextStreamHandler(TOPIC, async (reader, participant) => {
       const text = await reader.readAll();
-      setMessages((m) => [...m, { from: participant.identity, text }]);
+      setMessages((m) => [
+        ...m,
+        {
+          from: room.remoteParticipants.get(participant.identity)?.isAgent
+            ? "examiner"
+            : "other",
+          text,
+        },
+      ]);
     });
     room.on(RoomEvent.Disconnected, () => !cancelled && setStatus("error"));
 
@@ -69,7 +82,7 @@ export function Chat({ sessionId }: { sessionId: string }) {
       <ul className="messages">
         {messages.map((m, i) => (
           <li key={i}>
-            <strong>{m.from === "you" ? "You" : "Examiner"}:</strong> {m.text}
+            <strong>{LABELS[m.from]}:</strong> {m.text}
           </li>
         ))}
       </ul>
