@@ -54,10 +54,11 @@ Install the [`lk` CLI](https://docs.livekit.io/home/cli/) and `lk cloud auth`, t
 
 ```bash
 lk agent create          # first time only: writes livekit.toml
-lk agent secrets set ANTHROPIC_API_KEY=… LANGFUSE_PUBLIC_KEY=… LANGFUSE_SECRET_KEY=… \
-  LANGFUSE_BASE_URL=… SUPABASE_URL=… SUPABASE_SERVICE_ROLE_KEY=…
+lk agent update-secrets --secrets-file .env.secrets   # restarts the agent; `lk agent secrets` lists them
 lk agent deploy          # later deploys
 ```
+
+`.env.secrets` holds `KEY=VALUE` lines for the variables in the table above, except `LIVEKIT_*`. It is gitignored (`.env*`).
 
 The agent has no `agent_name`, so LiveKit dispatches it automatically to every new room.
 
