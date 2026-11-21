@@ -21,3 +21,5 @@ uv run pytest    # pytest (agent + grader)
 ```
 
 CI (`.github/workflows/ci.yml`) runs the same on every PR.
+
+`.github/workflows/supabase-keepalive.yml` queries Supabase every 3 days so the free-tier project never pauses (ADR-0008). It needs the repository secrets `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`; trigger it manually from the Actions tab to test.

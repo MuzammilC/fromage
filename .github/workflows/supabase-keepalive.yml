@@ -1,0 +1,34 @@
+# Free-tier Supabase projects pause after a week of inactivity (ADR-0008).
+# One cheap authenticated query every 3 days keeps the project awake.
+name: Supabase keep-alive
+
+on:
+  schedule:
+    - cron: "0 12 */3 * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Query Supabase
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
+            echo "::error::SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY repository secrets must be set"
+            exit 1
+          fi
+          # --fail turns any HTTP error into a non-zero exit, so an unreachable
+          # or paused project fails the run (and GitHub emails the owner).
+          curl --fail --silent --show-error \
+            --retry 3 --retry-delay 10 --retry-all-errors --max-time 30 \
+            --output /dev/null \
+            -H "apikey: $SUPABASE_SERVICE_ROLE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_ROLE_KEY" \
+            "${SUPABASE_URL%/}/rest/v1/profiles?select=id&limit=1"
+          echo "Supabase responded OK"
