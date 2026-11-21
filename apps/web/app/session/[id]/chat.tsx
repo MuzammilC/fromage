@@ -18,6 +18,8 @@ export function Chat({ sessionId }: { sessionId: string }) {
   );
   const [messages, setMessages] = useState<Message[]>([]);
   const [draft, setDraft] = useState("");
+  // Messages sent before the Examiner joins would reach an empty room and be lost.
+  const [examinerHere, setExaminerHere] = useState(false);
 
   useEffect(() => {
     const room = new Room();
@@ -37,6 +39,13 @@ export function Chat({ sessionId }: { sessionId: string }) {
       ]);
     });
     room.on(RoomEvent.Disconnected, () => !cancelled && setStatus("error"));
+    const syncExaminer = () =>
+      !cancelled &&
+      setExaminerHere(
+        [...room.remoteParticipants.values()].some((p) => p.isAgent),
+      );
+    room.on(RoomEvent.ParticipantConnected, syncExaminer);
+    room.on(RoomEvent.ParticipantDisconnected, syncExaminer);
 
     (async () => {
       try {
@@ -50,7 +59,10 @@ export function Chat({ sessionId }: { sessionId: string }) {
         const url = process.env.NEXT_PUBLIC_LIVEKIT_URL;
         if (!url) throw new Error("NEXT_PUBLIC_LIVEKIT_URL is not set");
         await room.connect(url, token);
-        if (!cancelled) setStatus("connected");
+        if (!cancelled) {
+          setStatus("connected");
+          syncExaminer();
+        }
       } catch {
         if (!cancelled) setStatus("error");
       }
@@ -76,7 +88,8 @@ export function Chat({ sessionId }: { sessionId: string }) {
     <section aria-label="Chat">
       <p role="status">
         {status === "connecting" && "Connecting…"}
-        {status === "connected" && "Connected"}
+        {status === "connected" &&
+          (examinerHere ? "Connected" : "Waiting for the Examiner to join…")}
         {status === "error" && "Could not connect. Reload to try again."}
       </p>
       <ul className="messages">
@@ -91,11 +104,11 @@ export function Chat({ sessionId }: { sessionId: string }) {
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           aria-label="Message"
-          disabled={status !== "connected"}
+          disabled={status !== "connected" || !examinerHere}
         />
         <button
           type="submit"
-          disabled={status !== "connected" || !draft.trim()}
+          disabled={status !== "connected" || !examinerHere || !draft.trim()}
         >
           Send
         </button>
