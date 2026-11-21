@@ -6,6 +6,7 @@ from pydantic import ValidationError
 
 from .generated import ExamDefinition
 from .taxonomy_generated import TopicTaxonomy
+from .validation import _duplicates
 
 
 class TaxonomyError(ValueError):
@@ -25,15 +26,13 @@ def parse_taxonomy(data: Any, definition: ExamDefinition | None = None) -> Topic
 
     problems: list[str] = []
     part_keys = [p.key.root for p in taxonomy.parts]
-    for key in sorted({k for k in part_keys if part_keys.count(k) > 1}):
-        problems.append(f"duplicate Part {key!r}")
+    problems += [f"Duplicate Part key {k!r}" for k in sorted(_duplicates(part_keys))]
     for part in taxonomy.parts:
-        seen: set[str] = set()
-        for theme in part.themes:
-            key = theme.root.key.root
-            if key in seen:
-                problems.append(f"duplicate theme {key!r} in Part {part.key.root!r}")
-            seen.add(key)
+        theme_keys = [theme.root.key.root for theme in part.themes]
+        problems += [
+            f"Duplicate theme key {k!r} in Part {part.key.root!r}"
+            for k in sorted(_duplicates(theme_keys))
+        ]
     if definition is not None:
         expected_ref = f"{definition.id}@{definition.version}"
         if taxonomy.exam_definition.root != expected_ref:
@@ -52,5 +51,6 @@ def parse_taxonomy(data: Any, definition: ExamDefinition | None = None) -> Topic
     return taxonomy
 
 
-def load_taxonomy(path: Path, definition: ExamDefinition | None = None) -> TopicTaxonomy:
-    return parse_taxonomy(yaml.safe_load(Path(path).read_text()), definition)
+def load_taxonomy(path: str | Path, definition: ExamDefinition | None = None) -> TopicTaxonomy:
+    path = Path(path)
+    return parse_taxonomy(yaml.safe_load(path.read_text(encoding="utf-8")), definition)

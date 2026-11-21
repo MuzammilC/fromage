@@ -9,59 +9,59 @@ parts:
       - key: introduce_yourself
         label: { en: Introducing yourself, fr: Se présenter }
         source: research
-        research_theme: "Part 1: the candidate introduces themselves"
+        research_theme: "introduces themselves"
       - key: family
         label: { en: Family, fr: La famille }
         source: research
-        research_theme: "Part 1: family"
+        research_theme: "family"
       - key: home
-        label: { en: Home, fr: Le logement }
+        label: { en: Home, fr: La maison }
         source: research
-        research_theme: "Part 1: home"
+        research_theme: "home"
       - key: hobbies
         label: { en: Hobbies, fr: Les loisirs }
         source: research
-        research_theme: "Part 1: hobbies"
+        research_theme: "hobbies"
       - key: friends
         label: { en: Friends, fr: Les amis }
         source: research
-        research_theme: "Part 1: friends"
+        research_theme: "friends"
       - key: daily_routine
         label: { en: Daily routine, fr: La journée type }
         source: personal_sphere
-        justification: "Everyday personal-sphere topic at A2; not named in the research doc."
+        justification: "§A.2 lists a typical day among the A1 Part 1 questions, and A2 Part 1 stays in the same personal sphere."
       - key: work_or_studies
         label: { en: Work or studies, fr: Le travail ou les études }
         source: personal_sphere
-        justification: "Everyday personal-sphere topic at A2; not named in the research doc."
+        justification: "§A.2 lists job among the A1 Part 1 questions, and work and study are core A2 personal-sphere content (see the workplace and studies monologue subjects)."
       - key: food
         label: { en: Food and meals, fr: La nourriture et les repas }
         source: personal_sphere
-        justification: "Everyday personal-sphere topic at A2; not named in the research doc."
+        justification: "Everyday meals and food are core personal-sphere content; §A.2 has no Part 1 theme for them, but restaurant is adjacent."
       - key: weekend
         label: { en: The weekend, fr: Le week-end }
         source: personal_sphere
-        justification: "Everyday personal-sphere topic at A2; not named in the research doc."
+        justification: "§A.2 lists weekend activities among the A1 Part 1 questions."
       - key: holidays
         label: { en: Holidays, fr: Les vacances }
         source: personal_sphere
-        justification: "Everyday personal-sphere topic at A2; not named in the research doc."
+        justification: "Adjacent to the sea vs mountain subject and the mountain holiday situation in §A.2."
       - key: neighbourhood
         label: { en: Neighbourhood and town, fr: Le quartier et la ville }
         source: personal_sphere
-        justification: "Everyday personal-sphere topic at A2; not named in the research doc."
+        justification: "Extends the home theme from §A.2 Part 1 to the surrounding area."
       - key: transport
         label: { en: Getting around, fr: Les déplacements }
         source: personal_sphere
-        justification: "Everyday personal-sphere topic at A2; not named in the research doc."
+        justification: "Everyday personal-sphere content, adjacent to the bus station and plane themes in §A.2."
       - key: pets
         label: { en: Pets, fr: Les animaux de compagnie }
         source: personal_sphere
-        justification: "Everyday personal-sphere topic at A2; not named in the research doc."
+        justification: "Adjacent to the adopting a dog situation in §A.2."
       - key: languages
         label: { en: Languages you speak, fr: Les langues parlées }
         source: personal_sphere
-        justification: "Everyday personal-sphere topic at A2; not named in the research doc."
+        justification: "Adjacent to the French monologue subject in §A.2 and a natural question for a language learner."
   - key: monologue_suivi
     themes:
       - key: housing
@@ -181,25 +181,25 @@ parts:
             fr: Prendre rendez-vous chez le médecin,
           }
         source: personal_sphere
-        justification: "Daily-life service situation typical of A2 interaction."
+        justification: "Everyday service call typical of A2 interaction; §A.2 does not list it among the A2 situations."
       - key: hotel_booking
         label: { en: Booking a hotel room, fr: Réserver une chambre d'hôtel }
         source: personal_sphere
-        justification: "Daily-life service situation typical of A2 interaction."
+        justification: "Hotel booking is an A1 Part 3 demo scenario in §A.2 and a standard everyday service situation at A2."
       - key: clothes_shop
         label: { en: Buying clothes, fr: Acheter des vêtements }
         source: personal_sphere
-        justification: "Daily-life service situation typical of A2 interaction."
+        justification: "Clothes shop is an A1 Part 3 demo scenario in §A.2 and a standard everyday service situation at A2."
       - key: train_ticket
         label: { en: Buying a train ticket, fr: Acheter un billet de train }
         source: personal_sphere
-        justification: "Daily-life service situation typical of A2 interaction."
+        justification: "Train station is an A1 Part 3 demo scenario in §A.2, adjacent to the A2 bus station situation."
       - key: inviting_friend
         label:
           { en: Inviting a friend to a party, fr: Inviter un ami à une fête }
         source: personal_sphere
-        justification: "Social situation with a friend, typical of A2 interaction."
+        justification: "Same social shape as the theatre show with a friend and mountain holiday situations in §A.2."
       - key: asking_directions
         label: { en: Asking for directions, fr: Demander son chemin }
         source: personal_sphere
-        justification: "Daily-life situation typical of A2 interaction."
+        justification: "Everyday situation close to the bus station theme in §A.2; not listed among the A2 situations there."
