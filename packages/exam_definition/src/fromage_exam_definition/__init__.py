@@ -7,6 +7,7 @@
 from .generated import ExamDefinition
 from .item import ItemError, load_item, parse_item
 from .item_generated import Item
+from .taxonomy import TaxonomyError, TopicTaxonomy, load_taxonomy, parse_taxonomy
 from .validation import (
     GRID_TOTAL_POINTS,
     ExamDefinitionError,
@@ -20,8 +21,12 @@ __all__ = [
     "ExamDefinitionError",
     "Item",
     "ItemError",
+    "TaxonomyError",
+    "TopicTaxonomy",
     "load_exam_definition",
     "load_item",
+    "load_taxonomy",
     "parse_exam_definition",
     "parse_item",
+    "parse_taxonomy",
 ]
