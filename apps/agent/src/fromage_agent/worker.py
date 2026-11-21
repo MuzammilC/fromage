@@ -19,6 +19,7 @@ from fromage_agent.llm import HaikuParaphraser
 from fromage_agent.store import create_store
 
 TOPIC = "chat"
+ERROR_REPLY = "Désolé, une erreur est survenue. Veuillez réessayer."
 ROOM_PREFIX = "session-"  # must match roomNameFor in apps/web/lib/livekit/session-token.ts
 logger = logging.getLogger("fromage-agent")
 
@@ -43,17 +44,24 @@ async def entrypoint(ctx: JobContext) -> None:
     await ctx.connect(auto_subscribe=AutoSubscribe.SUBSCRIBE_NONE)
 
     async def handle(reader: rtc.TextStreamReader, identity: str) -> None:
-        text = await reader.read_all()
         try:
-            reply = await examiner.on_candidate_message(text)
+            reply = await examiner.on_candidate_message(await reader.read_all())
         except Exception:
             logger.exception("Could not answer Candidate message in Session %s", session_id)
-            return
+            reply = ERROR_REPLY
         if reply:
-            await ctx.room.local_participant.send_text(reply, topic=TOPIC)
+            try:
+                await ctx.room.local_participant.send_text(reply, topic=TOPIC)
+            except Exception:
+                logger.exception("Could not send reply in Session %s", session_id)
+
+    # Keep references so tasks are not garbage-collected before they finish.
+    tasks: set[asyncio.Task] = set()
 
     def on_stream(reader: rtc.TextStreamReader, identity: str) -> None:
-        asyncio.create_task(handle(reader, identity))
+        task = asyncio.create_task(handle(reader, identity))
+        tasks.add(task)
+        task.add_done_callback(tasks.discard)
 
     ctx.room.register_text_stream_handler(TOPIC, on_stream)
     ctx.add_shutdown_callback(lambda: asyncio.to_thread(langfuse.flush))

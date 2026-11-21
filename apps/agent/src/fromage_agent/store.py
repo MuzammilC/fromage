@@ -5,6 +5,8 @@ from datetime import datetime
 
 from supabase import AsyncClient, acreate_client
 
+UNIQUE_VIOLATION = "23505"
+
 
 async def create_store() -> "SupabaseStore":
     client = await acreate_client(

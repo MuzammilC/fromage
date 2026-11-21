@@ -3,7 +3,7 @@
 from anthropic import AsyncAnthropic
 from langfuse import Langfuse
 
-from fromage_agent.echo import MODEL, Paraphrase, Usage, cost_usd
+from fromage_agent.echo import MODEL, Paraphrase, ParaphraseError, Usage, cost_usd
 
 SYSTEM_PROMPT = (
     "Tu es un examinateur de français. Le candidat écrit une phrase. "
@@ -41,5 +41,5 @@ class HaikuParaphraser:
                 cost_details={"total": cost_usd(usage)},
             )
         if not reply:
-            raise RuntimeError(f"Empty reply (stop_reason={response.stop_reason})")
+            raise ParaphraseError(f"Empty reply (stop_reason={response.stop_reason})", usage)
         return Paraphrase(text=reply, usage=usage)

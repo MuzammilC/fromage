@@ -1,6 +1,6 @@
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(5);
+select plan(10);
 
 insert into auth.users (id, instance_id, aud, role, email, email_confirmed_at)
 values ('aaaaaaaa-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'alice@example.com', now());
@@ -22,6 +22,30 @@ select throws_ok(
 select throws_ok(
   $$update public.sessions set cost_usd = 0$$,
   '42501', null, 'a User cannot write cost directly');
+
+-- The agent connects as service_role. Run the same calls it makes, with realistic
+-- amounts (one Haiku call costs ~$0.00002).
+reset role;
+set local role service_role;
+
+select lives_ok(
+  $$insert into public.transcript_turns (session_id, seq, speaker, text, started_at)
+    values ('aaaaaaaa-1111-0000-0000-000000000001', 0, 'candidate', 'Bonjour', now())$$,
+  'service_role can insert a turn');
+select throws_ok(
+  $$delete from public.transcript_turns$$,
+  '42501', null, 'service_role cannot delete turns');
+
+select public.add_session_cost('aaaaaaaa-1111-0000-0000-000000000001', 0.00002, '{"llm": 0.00002}');
+select public.add_session_cost('aaaaaaaa-1111-0000-0000-000000000001', 0.00002, '{"llm": 0.00002}');
+select is((select cost_usd from public.sessions), 0.00354::numeric, 'tiny costs are not rounded away');
+
+select throws_ok(
+  $$select public.add_session_cost('cccccccc-1111-0000-0000-000000000009', 0.00002, '{}')$$,
+  'P0002', null, 'an unknown Session is an error');
+select throws_ok(
+  $$select public.add_session_cost('aaaaaaaa-1111-0000-0000-000000000001', null, '{}')$$,
+  '22004', null, 'a null amount is an error');
 
 select * from finish();
 rollback;

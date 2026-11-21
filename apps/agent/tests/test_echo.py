@@ -1,34 +1,52 @@
 from datetime import UTC, datetime
 
 import pytest
-from fromage_agent.echo import EchoExaminer, Paraphrase, Usage, cost_usd
+from fromage_agent.echo import (
+    EchoExaminer,
+    Paraphrase,
+    ParaphraseError,
+    SeqConflict,
+    Usage,
+    cost_usd,
+)
 
 
 class FakeStore:
-    def __init__(self, existing_turns=0):
+    def __init__(self, existing_turns=0, conflicts=0, cost_fails=False):
         self.turns = []
         self.costs = []
         self._existing = existing_turns
+        self._conflicts = conflicts
+        self._cost_fails = cost_fails
 
     async def next_seq(self, session_id):
         return self._existing
 
     async def add_turn(self, session_id, seq, speaker, text, started_at, ended_at):
+        if self._conflicts:
+            self._conflicts -= 1
+            self._existing += 1  # the other writer's turn
+            raise SeqConflict
         self.turns.append((session_id, seq, speaker, text))
 
     async def add_cost(self, session_id, usd, breakdown):
+        if self._cost_fails:
+            raise RuntimeError("db down")
         self.costs.append((session_id, usd, breakdown))
 
 
 class FakeParaphraser:
-    def __init__(self, fail=False):
+    def __init__(self, fail=False, empty=False):
         self.calls = []
         self.fail = fail
+        self.empty = empty
 
     async def paraphrase(self, session_id, text):
         self.calls.append(text)
         if self.fail:
             raise RuntimeError("llm down")
+        if self.empty:
+            raise ParaphraseError("empty", Usage(1000, 200))
         return Paraphrase(text=f"Vous dites : {text}", usage=Usage(1000, 200))
 
 
@@ -84,6 +102,26 @@ async def test_candidate_turn_is_saved_even_if_the_llm_fails():
         await ex.on_candidate_message("Bonjour")
     assert store.turns == [("s1", 0, "candidate", "Bonjour")]
     assert store.costs == []
+
+
+async def test_reply_is_returned_even_if_recording_cost_fails():
+    ex, store, _ = make(FakeStore(cost_fails=True))
+    assert await ex.on_candidate_message("Bonjour") == "Vous dites : Bonjour"
+    assert len(store.turns) == 2
+
+
+async def test_cost_is_recorded_when_the_llm_reply_is_unusable():
+    ex, store, _ = make(paraphraser=FakeParaphraser(empty=True))
+    with pytest.raises(ParaphraseError):
+        await ex.on_candidate_message("Bonjour")
+    [(_, usd, _)] = store.costs
+    assert usd == pytest.approx(cost_usd(Usage(1000, 200)))
+
+
+async def test_retries_with_a_fresh_seq_when_another_writer_took_it():
+    ex, store, _ = make(FakeStore(existing_turns=2, conflicts=1))
+    await ex.on_candidate_message("Bonjour")
+    assert [t[1] for t in store.turns] == [3, 4]
 
 
 async def test_ignores_blank_messages():

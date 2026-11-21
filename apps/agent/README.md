@@ -58,6 +58,12 @@ lk agent update-secrets --secrets-file .env.secrets   # restarts the agent; `lk 
 lk agent deploy          # later deploys
 ```
 
+`requirements.txt` pins the image's dependencies from `uv.lock`. After changing dependencies, regenerate it before deploying (from the repo root):
+
+```bash
+uv export --frozen --no-dev --no-emit-workspace --package fromage-agent -o apps/agent/requirements.txt
+```
+
 `.env.secrets` holds `KEY=VALUE` lines for the variables in the table above, except `LIVEKIT_*`. It is gitignored (`.env*`).
 
 The agent has no `agent_name`, so LiveKit dispatches it automatically to every new room.

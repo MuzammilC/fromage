@@ -5,10 +5,13 @@ tested without any network. Adapters live in `llm.py`, `store.py` and `worker.py
 """
 
 import asyncio
+import logging
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Protocol
+
+logger = logging.getLogger(__name__)
 
 MODEL = "claude-haiku-5-5"
 # USD per token, for prompts up to 100K tokens.
@@ -30,6 +33,21 @@ class Paraphrase:
 
 def cost_usd(usage: Usage) -> float:
     return usage.input_tokens * INPUT_USD_PER_TOKEN + usage.output_tokens * OUTPUT_USD_PER_TOKEN
+
+
+class ParaphraseError(RuntimeError):
+    """The LLM call failed after consuming tokens, which still cost money."""
+
+    def __init__(self, message: str, usage: Usage) -> None:
+        super().__init__(message)
+        self.usage = usage
+
+
+class SeqConflict(Exception):
+    """Another writer already used this turn's (session_id, seq)."""
+
+
+MAX_SEQ_ATTEMPTS = 3
 
 
 class Paraphraser(Protocol):
@@ -81,15 +99,36 @@ class EchoExaminer:
             await self._save("candidate", text, now)
 
             started = self._clock()
-            result = await self._paraphraser.paraphrase(self._session_id, text)
+            try:
+                result = await self._paraphraser.paraphrase(self._session_id, text)
+            except ParaphraseError as error:
+                await self._record_cost(error.usage)
+                raise
             await self._save("examiner", result.text, started)
-
-            usd = cost_usd(result.usage)
-            await self._store.add_cost(self._session_id, usd, {"llm": usd})
+            await self._record_cost(result.usage)
             return result.text
 
+    async def _record_cost(self, usage: Usage) -> None:
+        # Bookkeeping must never stop the Candidate getting their reply.
+        usd = cost_usd(usage)
+        try:
+            await self._store.add_cost(self._session_id, usd, {"llm": usd})
+        except Exception:
+            logger.exception("Could not record cost for Session %s", self._session_id)
+
     async def _save(self, speaker: str, text: str, started_at: datetime) -> None:
-        seq = self._seq
-        assert seq is not None
-        await self._store.add_turn(self._session_id, seq, speaker, text, started_at, self._clock())
-        self._seq = seq + 1
+        for attempt in range(MAX_SEQ_ATTEMPTS):
+            seq = self._seq
+            assert seq is not None
+            try:
+                await self._store.add_turn(
+                    self._session_id, seq, speaker, text, started_at, self._clock()
+                )
+            except SeqConflict:
+                # Another writer took this seq (e.g. a re-dispatched job): resync and retry.
+                if attempt == MAX_SEQ_ATTEMPTS - 1:
+                    raise
+                self._seq = await self._store.next_seq(self._session_id)
+                continue
+            self._seq = seq + 1
+            return
