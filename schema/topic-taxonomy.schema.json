@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/MuzammilC/fromage/schema/topic-taxonomy.schema.json",
+  "title": "TopicTaxonomy",
+  "description": "The themes for each Part of one Exam Definition that original Items are written against. Themes only, no prompt text.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["exam_definition", "parts"],
+  "properties": {
+    "exam_definition": { "$ref": "#/$defs/ExamDefinitionRef" },
+    "parts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/PartThemes" }
+    }
+  },
+  "$defs": {
+    "Key": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
+    "Text": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "ExamDefinitionRef": {
+      "description": "The Exam Definition this taxonomy belongs to, as `id@version`.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*@[1-9][0-9]*$"
+    },
+    "Label": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["en", "fr"],
+      "properties": {
+        "en": { "$ref": "#/$defs/Text" },
+        "fr": { "$ref": "#/$defs/Text" }
+      }
+    },
+    "PartThemes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "themes"],
+      "properties": {
+        "key": { "$ref": "#/$defs/Key" },
+        "themes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/Theme" }
+        }
+      }
+    },
+    "Theme": {
+      "description": "One theme. `key` is what an Item's `topics` list refers to. Every theme is traceable: it either names a research-doc theme or is justified as personal-sphere A2 content.",
+      "anyOf": [
+        { "$ref": "#/$defs/ResearchTheme" },
+        { "$ref": "#/$defs/PersonalSphereTheme" }
+      ]
+    },
+    "ResearchTheme": {
+      "description": "A theme named in docs/research/delf-speaking-coach.md §A.2.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "label", "source", "research_theme"],
+      "properties": {
+        "key": { "$ref": "#/$defs/Key" },
+        "label": { "$ref": "#/$defs/Label" },
+        "source": { "const": "research" },
+        "research_theme": { "$ref": "#/$defs/Text" }
+      }
+    },
+    "PersonalSphereTheme": {
+      "description": "Ordinary A2 personal-sphere content that the research doc does not name.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "label", "source", "justification"],
+      "properties": {
+        "key": { "$ref": "#/$defs/Key" },
+        "label": { "$ref": "#/$defs/Label" },
+        "source": { "const": "personal_sphere" },
+        "justification": { "$ref": "#/$defs/Text" }
+      }
+    }
+  }
+}

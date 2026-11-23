@@ -1,0 +1,13 @@
+exam_definition: fixture-a2@1
+parts:
+  - key: guided_interview
+    themes:
+      - key: food
+        label: { en: Food, fr: La nourriture }
+        source: personal_sphere
+  - key: monologue
+    themes:
+      - key: sport
+        label: { en: Sport, fr: Le sport }
+        source: research
+        research_theme: "sport"

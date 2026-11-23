@@ -29,6 +29,15 @@ const targets = [
     zod: { file: "item-generated.ts", name: "itemSchema", type: "Item" },
     pydantic: "item_generated.py",
   },
+  {
+    schema: "topic-taxonomy.schema.json",
+    zod: {
+      file: "taxonomy-generated.ts",
+      name: "topicTaxonomySchema",
+      type: "TopicTaxonomy",
+    },
+    pydantic: "taxonomy_generated.py",
+  },
 ];
 
 for (const target of targets) {

@@ -1,0 +1,205 @@
+# Topic Taxonomy for the DELF A2 tout public speaking exam (delf-a2-tp@1).
+# Themes only, no prompt text. Original Items are written against these keys (see ADR 0007).
+# Each theme is traceable: `research` themes name the theme in docs/research/delf-speaking-coach.md §A.2,
+# `personal_sphere` themes carry a justification.
+exam_definition: delf-a2-tp@1
+parts:
+  - key: entretien_dirige
+    themes:
+      - key: introduce_yourself
+        label: { en: Introducing yourself, fr: Se présenter }
+        source: research
+        research_theme: "introduces themselves"
+      - key: family
+        label: { en: Family, fr: La famille }
+        source: research
+        research_theme: "family"
+      - key: home
+        label: { en: Home, fr: La maison }
+        source: research
+        research_theme: "home"
+      - key: hobbies
+        label: { en: Hobbies, fr: Les loisirs }
+        source: research
+        research_theme: "hobbies"
+      - key: friends
+        label: { en: Friends, fr: Les amis }
+        source: research
+        research_theme: "friends"
+      - key: daily_routine
+        label: { en: Daily routine, fr: La journée type }
+        source: personal_sphere
+        justification: "§A.2 lists a typical day among the A1 Part 1 questions, and A2 Part 1 stays in the same personal sphere."
+      - key: work_or_studies
+        label: { en: Work or studies, fr: Le travail ou les études }
+        source: personal_sphere
+        justification: "§A.2 lists job among the A1 Part 1 questions, and work and study are core A2 personal-sphere content (see the workplace and studies monologue subjects)."
+      - key: food
+        label: { en: Food and meals, fr: La nourriture et les repas }
+        source: personal_sphere
+        justification: "Everyday meals and food are core personal-sphere content; §A.2 has no Part 1 theme for them, but restaurant is adjacent."
+      - key: weekend
+        label: { en: The weekend, fr: Le week-end }
+        source: personal_sphere
+        justification: "§A.2 lists weekend activities among the A1 Part 1 questions."
+      - key: holidays
+        label: { en: Holidays, fr: Les vacances }
+        source: personal_sphere
+        justification: "Adjacent to the sea vs mountain subject and the mountain holiday situation in §A.2."
+      - key: neighbourhood
+        label: { en: Neighbourhood and town, fr: Le quartier et la ville }
+        source: personal_sphere
+        justification: "Extends the home theme from §A.2 Part 1 to the surrounding area."
+      - key: transport
+        label: { en: Getting around, fr: Les déplacements }
+        source: personal_sphere
+        justification: "Everyday personal-sphere content, adjacent to the bus station and plane themes in §A.2."
+      - key: pets
+        label: { en: Pets, fr: Les animaux de compagnie }
+        source: personal_sphere
+        justification: "Adjacent to the adopting a dog situation in §A.2."
+      - key: languages
+        label: { en: Languages you speak, fr: Les langues parlées }
+        source: personal_sphere
+        justification: "Adjacent to the French monologue subject in §A.2 and a natural question for a language learner."
+  - key: monologue_suivi
+    themes:
+      - key: housing
+        label: { en: Housing, fr: Le logement }
+        source: research
+        research_theme: "housing"
+      - key: sea_vs_mountain
+        label: { en: Sea or mountain, fr: La mer ou la montagne }
+        source: research
+        research_theme: "sea vs mountain"
+      - key: friends
+        label: { en: Friends, fr: Les amis }
+        source: research
+        research_theme: "friends"
+      - key: sport
+        label: { en: Sport, fr: Le sport }
+        source: research
+        research_theme: "sport"
+      - key: shops
+        label: { en: Shops, fr: Les magasins }
+        source: research
+        research_theme: "shops"
+      - key: cinema
+        label: { en: Cinema, fr: Le cinéma }
+        source: research
+        research_theme: "cinema"
+      - key: plane
+        label: { en: Travelling by plane, fr: L'avion }
+        source: research
+        research_theme: "plane"
+      - key: restaurant
+        label: { en: Restaurants, fr: Le restaurant }
+        source: research
+        research_theme: "restaurant"
+      - key: workday
+        label: { en: A working day, fr: La journée de travail }
+        source: research
+        research_theme: "workday"
+      - key: computer
+        label: { en: Computers, fr: L'ordinateur }
+        source: research
+        research_theme: "computer"
+      - key: workplace
+        label: { en: The workplace, fr: Le lieu de travail }
+        source: research
+        research_theme: "workplace"
+      - key: books
+        label: { en: Books, fr: Les livres }
+        source: research
+        research_theme: "books"
+      - key: studies
+        label: { en: Studies, fr: Les études }
+        source: research
+        research_theme: "studies"
+      - key: french
+        label: { en: Learning French, fr: Le français }
+        source: research
+        research_theme: "French"
+      - key: favourite_teacher
+        label: { en: A favourite teacher, fr: Le professeur préféré }
+        source: research
+        research_theme: "favourite teacher"
+  - key: exercice_en_interaction
+    themes:
+      - key: estate_agency
+        label: { en: At an estate agency, fr: À l'agence immobilière }
+        source: research
+        research_theme: "estate agency"
+      - key: mountain_holiday
+        label:
+          {
+            en: Planning a mountain holiday with a friend,
+            fr: Des vacances à la montagne avec un ami,
+          }
+        source: research
+        research_theme: "mountain holiday (talking to a friend)"
+      - key: buying_computer
+        label: { en: Buying a computer, fr: L'achat d'un ordinateur }
+        source: research
+        research_theme: "buying a computer"
+      - key: adopting_dog
+        label: { en: Adopting a dog, fr: L'adoption d'un chien }
+        source: research
+        research_theme: "adopting a dog"
+      - key: choosing_theatre_show
+        label:
+          {
+            en: Choosing a theatre show with a friend,
+            fr: Le choix d'un spectacle avec un ami,
+          }
+        source: research
+        research_theme: "choosing a theatre show with a friend"
+      - key: restaurant
+        label: { en: At a restaurant, fr: Au restaurant }
+        source: research
+        research_theme: "restaurant"
+      - key: bus_station
+        label: { en: At the bus station, fr: À la gare routière }
+        source: research
+        research_theme: "bus station"
+      - key: car_accident
+        label:
+          {
+            en: Explaining a car accident to a police officer,
+            fr: Expliquer un accident de voiture à un policier,
+          }
+        source: research
+        research_theme: "explaining a car accident to a police officer"
+      - key: job_interview
+        label: { en: A job interview, fr: L'entretien d'embauche }
+        source: research
+        research_theme: "job interview"
+      - key: doctor_appointment
+        label:
+          {
+            en: Making a doctor's appointment,
+            fr: Prendre rendez-vous chez le médecin,
+          }
+        source: personal_sphere
+        justification: "Everyday service call typical of A2 interaction; §A.2 does not list it among the A2 situations."
+      - key: hotel_booking
+        label: { en: Booking a hotel room, fr: Réserver une chambre d'hôtel }
+        source: personal_sphere
+        justification: "Hotel booking is an A1 Part 3 demo scenario in §A.2 and a standard everyday service situation at A2."
+      - key: clothes_shop
+        label: { en: Buying clothes, fr: Acheter des vêtements }
+        source: personal_sphere
+        justification: "Clothes shop is an A1 Part 3 demo scenario in §A.2 and a standard everyday service situation at A2."
+      - key: train_ticket
+        label: { en: Buying a train ticket, fr: Acheter un billet de train }
+        source: personal_sphere
+        justification: "Train station is an A1 Part 3 demo scenario in §A.2, adjacent to the A2 bus station situation."
+      - key: inviting_friend
+        label:
+          { en: Inviting a friend to a party, fr: Inviter un ami à une fête }
+        source: personal_sphere
+        justification: "Same social shape as the theatre show with a friend and mountain holiday situations in §A.2."
+      - key: asking_directions
+        label: { en: Asking for directions, fr: Demander son chemin }
+        source: personal_sphere
+        justification: "Everyday situation close to the bus station theme in §A.2; not listed among the A2 situations there."

@@ -1,0 +1,19 @@
+# Fixture taxonomy for the fixture Exam Definition in ../valid.yaml.
+exam_definition: fixture-a2@1
+parts:
+  - key: guided_interview
+    themes:
+      - key: family
+        label: { en: Family, fr: La famille }
+        source: research
+        research_theme: "family"
+      - key: food
+        label: { en: Food, fr: La nourriture }
+        source: personal_sphere
+        justification: "Everyday food and meals, a staple of A2 small talk."
+  - key: monologue
+    themes:
+      - key: sport
+        label: { en: Sport, fr: Le sport }
+        source: research
+        research_theme: "sport"

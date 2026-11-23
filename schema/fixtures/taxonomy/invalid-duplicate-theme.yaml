@@ -1,0 +1,18 @@
+exam_definition: fixture-a2@1
+parts:
+  - key: guided_interview
+    themes:
+      - key: family
+        label: { en: Family, fr: La famille }
+        source: research
+        research_theme: "family"
+      - key: family
+        label: { en: Family again, fr: La famille encore }
+        source: research
+        research_theme: "family"
+  - key: monologue
+    themes:
+      - key: sport
+        label: { en: Sport, fr: Le sport }
+        source: research
+        research_theme: "sport"
