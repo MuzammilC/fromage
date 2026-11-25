@@ -23,3 +23,18 @@ uv run pytest    # pytest (agent + grader)
 CI (`.github/workflows/ci.yml`) runs the same on every PR.
 
 `.github/workflows/supabase-keepalive.yml` queries Supabase every 3 days so the free-tier project never pauses (ADR-0008). It needs the repository secrets `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`; trigger it manually from the Actions tab to test.
+
+## Environment
+
+Copy `.env.example` to `.env` at the repo root. The web app, the agent and `gen-items` all read that one file.
+
+## Generating draft Items
+
+```bash
+uv run gen-items --exam delf-a2-tp --part monologue_suivi --theme logement --n 3
+```
+
+It needs `ANTHROPIC_API_KEY` and the `LANGFUSE_*` keys from the repo-root `.env`.
+Writes draft Items to `content/items/`, traces each call in Langfuse and prints the run's cost.
+Generation prompts live in `packages/item_generator/src/fromage_item_generator/prompts/`; the
+file's version (for example `monologue_subject-v1`) is stamped into every Item.

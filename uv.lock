@@ -19,6 +19,7 @@ members = [
     "fromage-agent",
     "fromage-exam-definition",
     "fromage-grader",
+    "fromage-item-generator",
 ]
 
 [manifest.dependency-groups]
@@ -844,6 +845,27 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "fromage-exam-definition", editable = "packages/exam_definition" }]
+
+[[package]]
+name = "fromage-item-generator"
+version = "0.1.0"
+source = { editable = "packages/item_generator" }
+dependencies = [
+    { name = "anthropic" },
+    { name = "fromage-exam-definition" },
+    { name = "langfuse" },
+    { name = "python-dotenv" },
+    { name = "pyyaml" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "anthropic", specifier = ">=0.40" },
+    { name = "fromage-exam-definition", editable = "packages/exam_definition" },
+    { name = "langfuse", specifier = ">=3" },
+    { name = "python-dotenv", specifier = ">=1" },
+    { name = "pyyaml", specifier = ">=6" },
+]
 
 [[package]]
 name = "frozenlist"
