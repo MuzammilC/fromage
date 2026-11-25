@@ -7,3 +7,7 @@ __pycache__
 *.egg-info
 .env*
 !.env.example
+
+# FEI sample text for check-items (local only, never committed)
+content/fei-samples/
+item-check-report.md

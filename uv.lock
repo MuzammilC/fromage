@@ -19,6 +19,7 @@ members = [
     "fromage-agent",
     "fromage-exam-definition",
     "fromage-grader",
+    "fromage-item-checker",
     "fromage-item-generator",
 ]
 
@@ -845,6 +846,25 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [{ name = "fromage-exam-definition", editable = "packages/exam_definition" }]
+
+[[package]]
+name = "fromage-item-checker"
+version = "0.1.0"
+source = { editable = "packages/item_checker" }
+dependencies = [
+    { name = "anthropic" },
+    { name = "fromage-exam-definition" },
+    { name = "python-dotenv" },
+    { name = "pyyaml" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "anthropic", specifier = ">=0.40" },
+    { name = "fromage-exam-definition", editable = "packages/exam_definition" },
+    { name = "python-dotenv", specifier = ">=1" },
+    { name = "pyyaml", specifier = ">=6" },
+]
 
 [[package]]
 name = "fromage-item-generator"
