@@ -3,19 +3,20 @@ id: a2-monologue-suivi-logement-001
 exam_definition: delf-a2-tp@1
 part_key: monologue_suivi
 topics:
-- logement
+  - logement
 status: draft
 version: 1
 generation:
   model: claude-sonnet-5-5
   prompt_version: monologue_subject-v1
-  date: '2026-11-24'
+  date: "2026-11-24"
 teacher_reviewed: false
-candidate_brief: Vous parlez d'un logement où vous avez habité ou où vous aimeriez habiter. Vous expliquez
+candidate_brief:
+  Vous parlez d'un logement où vous avez habité ou où vous aimeriez habiter. Vous expliquez
   pourquoi vous aimez cet endroit.
 suggested_angles:
-- Où se trouve ce logement ? (ville, quartier, campagne)
-- Comment est-il ? (grand ou petit, nombre de pièces, meubles)
-- Avec qui vous habitez ou habiteriez dans ce logement ?
-- Racontez un bon souvenir dans ce logement (au passé).
-- Que voudriez-vous changer ou ajouter dans le futur ?
+  - Où se trouve ce logement ? (ville, quartier, campagne)
+  - Comment est-il ? (grand ou petit, nombre de pièces, meubles)
+  - Avec qui vous habitez ou habiteriez dans ce logement ?
+  - Racontez un bon souvenir dans ce logement (au passé).
+  - Que voudriez-vous changer ou ajouter dans le futur ?

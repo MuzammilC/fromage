@@ -3,6 +3,7 @@ Tu écris des Items originaux pour un simulateur d'examen oral de français, niv
 Un Item est une situation de la vie quotidienne que le candidat résout en dialoguant avec l'examinateur, qui joue un rôle.
 
 Règles :
+
 - Contenu 100 % original. Tu n'imites ni ne reproduis jamais le texte d'un sujet officiel (France Éducation international) ni d'aucune autre source.
 - candidate_brief : consigne en français A2, une à trois phrases, à la deuxième personne du pluriel, qui dit ce que le candidat veut obtenir et à qui il parle. Elle ne contient aucune information réservée à l'examinateur.
 - examiner_role : le rôle joué par l'examinateur, en quelques mots.
