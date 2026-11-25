@@ -1,0 +1,21 @@
+type: monologue_subject
+id: a2-monologue-suivi-logement-002
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+- logement
+status: draft
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: '2026-11-24'
+teacher_reviewed: false
+candidate_brief: Vous parlez d'un endroit où vous avez habité et que vous avez aimé. Vous expliquez pourquoi
+  ce logement était important pour vous.
+suggested_angles:
+- Où était ce logement (ville, quartier) et comment il était (grand, petit, avec jardin, etc.) ?
+- Avec qui vous habitiez à ce moment-là ?
+- Quelle pièce vous aimiez le plus et pourquoi ?
+- Un souvenir agréable dans ce logement (une fête, un repas, une rencontre).
+- Aujourd'hui, comment est votre logement et que voulez-vous changer plus tard ?
