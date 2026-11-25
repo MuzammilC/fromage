@@ -4,6 +4,7 @@ from langfuse import get_client
 from .generator import LLMResult
 
 DEFAULT_MODEL = "claude-sonnet-5-5"
+MAX_TOKENS = 4000
 
 
 class AnthropicLLM:
@@ -14,16 +15,17 @@ class AnthropicLLM:
         self._client = anthropic.Anthropic()
         self._langfuse = get_client()
 
-    def complete(self, system: str, user: str) -> LLMResult:
+    def complete(self, system: str, user: str, metadata: dict[str, str] | None = None) -> LLMResult:
         with self._langfuse.start_as_current_observation(
             as_type="generation",
             name="gen-items",
             model=self.model,
             input={"system": system, "user": user},
+            metadata=metadata,
         ) as generation:
             message = self._client.messages.create(
                 model=self.model,
-                max_tokens=2000,
+                max_tokens=MAX_TOKENS,
                 system=system,
                 messages=[{"role": "user", "content": user}],
             )
@@ -33,7 +35,9 @@ class AnthropicLLM:
                 "output": message.usage.output_tokens,
             }
             generation.update(output=text, usage_details=usage)
-        return LLMResult(text, usage["input"], usage["output"])
+        return LLMResult(
+            text, usage["input"], usage["output"], truncated=message.stop_reason == "max_tokens"
+        )
 
     def flush(self) -> None:
         self._langfuse.flush()
