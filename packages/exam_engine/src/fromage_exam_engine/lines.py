@@ -8,6 +8,7 @@ from fromage_exam_definition.generated import Part
 PART_FALLBACK = "Nous passons à la partie suivante."
 DRAW_INTRO = "Pour chaque partie, regardez les deux sujets et choisissez-en un."
 PREP_ENDED = "Le temps de préparation est terminé. Nous commençons l'épreuve."
+MOVE_ON = "Passons à la question suivante."
 SESSION_ENDED = "Merci, l'épreuve est terminée. Au revoir."
 
 

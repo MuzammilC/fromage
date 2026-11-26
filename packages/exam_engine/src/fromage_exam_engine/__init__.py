@@ -7,9 +7,12 @@ from .effects import (
     ExaminerItem,
     Phase,
     PhaseChanged,
+    QuestionUnanswered,
+    RepeatQuestion,
     SayFixedLine,
     SessionEnded,
     ShowDraw,
+    SimplifyQuestion,
     WrapUpAllowed,
 )
 from .engine import EngineConfig, EngineError, ExamEngine
@@ -19,11 +22,14 @@ from .events import (
     CandidateTurn,
     ChoseItem,
     Event,
+    ExaminerDone,
     Ready,
     Tick,
 )
+from .relance import DEFAULT_RELANCE, Medium, RelanceThresholds
 
 __all__ = [
+    "DEFAULT_RELANCE",
     "AskExaminer",
     "CandidateActivity",
     "CandidateDone",
@@ -35,13 +41,19 @@ __all__ = [
     "EngineError",
     "Event",
     "ExamEngine",
+    "ExaminerDone",
     "ExaminerItem",
+    "Medium",
     "Phase",
     "PhaseChanged",
+    "QuestionUnanswered",
     "Ready",
+    "RelanceThresholds",
+    "RepeatQuestion",
     "SayFixedLine",
     "SessionEnded",
     "ShowDraw",
+    "SimplifyQuestion",
     "Tick",
     "WrapUpAllowed",
 ]

@@ -13,8 +13,10 @@ from __future__ import annotations
 
 import copy
 import random
-from dataclasses import dataclass
+from collections.abc import Mapping
+from dataclasses import dataclass, field
 from enum import Enum, IntEnum
+from types import MappingProxyType
 
 from fromage_exam_definition import ExamDefinition, Item
 
@@ -27,9 +29,12 @@ from .effects import (
     ExaminerItem,
     Phase,
     PhaseChanged,
+    QuestionUnanswered,
+    RepeatQuestion,
     SayFixedLine,
     SessionEnded,
     ShowDraw,
+    SimplifyQuestion,
     WrapUpAllowed,
 )
 from .events import (
@@ -38,9 +43,11 @@ from .events import (
     CandidateTurn,
     ChoseItem,
     Event,
+    ExaminerDone,
     Ready,
     Tick,
 )
+from .relance import DEFAULT_RELANCE, Medium, RelanceThresholds
 
 
 class EngineError(ValueError):
@@ -54,6 +61,11 @@ class EngineConfig:
     listening_share: float = 0.75
     """The share of a listen-only Part's maximum time given to the Candidate's monologue.
     The rest is left for the follow-up questions."""
+    medium: Medium = Medium.TEXT
+    relance: Mapping[Medium, RelanceThresholds] = field(
+        default_factory=lambda: dict(DEFAULT_RELANCE)
+    )
+    """Relance thresholds per Medium. The engine uses the entry for `medium`."""
 
     def __post_init__(self) -> None:
         if self.max_follow_ups < 0:
@@ -62,6 +74,14 @@ class EngineConfig:
             raise EngineError(
                 f"listening_share must be between 0 and 1, got {self.listening_share}"
             )
+        # A read-only copy, so the thresholds cannot change after they were checked.
+        object.__setattr__(self, "relance", MappingProxyType(dict(self.relance)))
+        if self.medium not in self.relance:
+            raise EngineError(f"No Relance thresholds for the {self.medium.value!r} Medium")
+
+    @property
+    def thresholds(self) -> RelanceThresholds:
+        return self.relance[self.medium]
 
 
 class _Stage(Enum):
@@ -76,6 +96,7 @@ class _Deadline(IntEnum):
     WRAP_UP = 1
     LISTENING_END = 2
     PART_END = 3
+    RELANCE = 4  # after PART_END: a step due at the very end of a Part never happens
 
 
 class ExamEngine:
@@ -107,6 +128,10 @@ class ExamEngine:
         self._stage = _Stage.INTERACTIVE
         self._wrap_up_allowed = False
         self._follow_ups_asked = 0
+        self._awaiting_reply = False
+        self._examiner_speaking = False
+        self._silence_since = 0.0
+        self._relance_step = 0
 
     # --- reading the state ---
 
@@ -171,11 +196,19 @@ class ExamEngine:
                     effects += self._end_prep()
             case CandidateActivity():
                 self._last_activity_at = event.at
+                self._silence_since = event.at
+            case ExaminerDone():
+                if self._examiner_speaking:
+                    self._examiner_speaking = False
+                    self._awaiting_reply = True
+                    self._silence_since = event.at
             case CandidateDone():
                 if self._phase is Phase.PART and self._stage is _Stage.LISTENING:
                     effects += self._begin_follow_ups()
             case CandidateTurn():
                 self._last_activity_at = event.at
+                if event.text.strip():  # a blank message is not activity
+                    self._silence_since = event.at
                 effects += self._on_candidate_turn(event)
             case Tick():
                 pass
@@ -249,7 +282,18 @@ class ExamEngine:
         if self._stage is _Stage.LISTENING:
             listening = round(part.target_duration_seconds.max * self._config.listening_share)
             due.append((self._part_started_at + listening, _Deadline.LISTENING_END))
+        if (relance_due := self._relance_due()) is not None:
+            due.append((relance_due, _Deadline.RELANCE))
         return min(due)
+
+    def _relance_due(self) -> float | None:
+        thresholds = self._config.thresholds
+        if self._stage is _Stage.LISTENING:
+            # No Relance while the Candidate speaks alone, but a long silence ends the stretch.
+            return self._silence_since + thresholds.listening_end_after
+        if not self._awaiting_reply or self._relance_step >= len(thresholds.steps):
+            return None
+        return self._silence_since + thresholds.steps[self._relance_step]
 
     def _advance(self, at: float) -> list[Effect]:
         if at < self._now:
@@ -274,6 +318,8 @@ class ExamEngine:
                 return self._begin_follow_ups()
             case _Deadline.PART_END:
                 return self._end_part()
+            case _Deadline.RELANCE:
+                return self._relance()
 
     # --- Draws and Prep Time ---
 
@@ -319,6 +365,10 @@ class ExamEngine:
         self._part_started_at = self._now
         self._wrap_up_allowed = False
         self._follow_ups_asked = 0
+        self._awaiting_reply = False
+        self._examiner_speaking = False
+        self._silence_since = self._now
+        self._relance_step = 0
         self._stage = (
             _Stage.LISTENING if part.turn_mode.value == "listen_only" else _Stage.INTERACTIVE
         )
@@ -329,7 +379,7 @@ class ExamEngine:
             SayFixedLine(lines.part_announcement(part)),
         ]
         if self._stage is _Stage.INTERACTIVE:
-            effects.append(self._ask("opening"))
+            effects.append(self._ask_and_wait("opening"))
         return effects
 
     def _end_part(self) -> list[Effect]:
@@ -347,7 +397,7 @@ class ExamEngine:
             return []
         match self._stage:
             case _Stage.INTERACTIVE:
-                return [self._ask("candidate_turn", event.text)]
+                return [self._ask_and_wait("candidate_turn", event.text)]
             case _Stage.LISTENING:
                 # The Examiner only listens during a monologue.
                 return []
@@ -364,9 +414,56 @@ class ExamEngine:
 
     def _ask_follow_up(self) -> list[Effect]:
         self._follow_ups_asked += 1
-        return [self._ask("follow_up", follow_up_number=self._follow_ups_asked)]
+        return [self._ask_and_wait("follow_up", follow_up_number=self._follow_ups_asked)]
+
+    # --- Relance ---
+
+    def _relance(self) -> list[Effect]:
+        """Carry out the next step of the Relance policy. Silence is counted from the last activity."""
+        if self._stage is _Stage.LISTENING:
+            return self._begin_follow_ups()
+        part = self._parts[self._part_index].key
+        step = self._relance_step
+        self._relance_step += 1
+        match step:
+            case 0:
+                return [RepeatQuestion(part)]
+            case 1:
+                return [SimplifyQuestion(part)]
+            case 2:
+                return [self._ask("reformulate", follow_up_number=self._follow_up_number())]
+            case 3:
+                return [
+                    SayFixedLine(lines.MOVE_ON),
+                    QuestionUnanswered(part),
+                    *self._next_question(),
+                ]
+            case _:
+                raise AssertionError(f"No Relance step {step}")
+
+    def _next_question(self) -> list[Effect]:
+        if self._stage is _Stage.FOLLOW_UP:
+            if self._follow_ups_asked >= self._config.max_follow_ups:
+                return self._end_part()
+            return self._ask_follow_up()
+        return [self._ask_and_wait("next_question")]
+
+    def _follow_up_number(self) -> int | None:
+        return self._follow_ups_asked if self._stage is _Stage.FOLLOW_UP else None
 
     # --- the Examiner's context ---
+
+    def _ask_and_wait(
+        self,
+        reason: AskReason,
+        candidate_text: str | None = None,
+        follow_up_number: int | None = None,
+    ) -> AskExaminer:
+        """Ask the Examiner for a new question. Silence is counted once `ExaminerDone` arrives."""
+        self._examiner_speaking = True
+        self._awaiting_reply = False
+        self._relance_step = 0
+        return self._ask(reason, candidate_text, follow_up_number)
 
     def _ask(
         self,
