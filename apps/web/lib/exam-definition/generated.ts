@@ -29,6 +29,21 @@ export const examDefinitionSchema = z
               ])
               .describe("The one Item type a Candidate is given in this Part.")
               .optional(),
+            announcement: z
+              .string()
+              .min(1)
+              .describe(
+                "The fixed French line the Examiner says when this Part starts. Omit to use a generic line.",
+              )
+              .optional(),
+            draw_count: z
+              .number()
+              .int()
+              .gte(2)
+              .describe(
+                "How many Items the Candidate is offered in a Draw for this Part, keeping one. Omit when the Part has no Draw. Needs an item_type.",
+              )
+              .optional(),
           })
           .strict(),
       )

@@ -44,6 +44,10 @@ def _check_semantics(definition: ExamDefinition) -> None:
                 f"Part {part.key!r}: target duration min {target.min} is above max {target.max}"
             )
 
+    for part in definition.parts:
+        if part.draw_count is not None and part.item_type is None:
+            problems.append(f"Part {part.key!r} has a draw_count but no item_type to draw")
+
     covered: list[str] = []
     for period in definition.prep_periods or []:
         for covered_part in (p.root for p in period.parts):
@@ -56,6 +60,14 @@ def _check_semantics(definition: ExamDefinition) -> None:
     problems += [
         f"Part {k!r} is covered by more than one Prep Time" for k in sorted(_duplicates(covered))
     ]
+
+    for part in definition.parts:
+        if part.draw_count is None:
+            continue
+        if part.item_type is not None and part.item_type.value == "question_bank":
+            problems.append(f"Part {part.key!r}: a question bank cannot be offered as a Draw")
+        if part.key not in covered:
+            problems.append(f"Part {part.key!r} has a draw_count but no Prep Time covers it")
 
     for criterion in definition.grid:
         scope = criterion.scope.root

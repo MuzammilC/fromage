@@ -77,4 +77,52 @@ describe("parseExamDefinition", () => {
       /guided_interview.*min 200.*max 100/,
     );
   });
+
+  it("accepts a draw_count on a Part with an item_type", () => {
+    const data = fixture("valid.yaml") as {
+      parts: { item_type?: string; draw_count?: number }[];
+    };
+    data.parts[1].item_type = "monologue_subject";
+    data.parts[1].draw_count = 2;
+    expect(parseExamDefinition(data).parts[1].draw_count).toBe(2);
+  });
+
+  it("rejects a draw_count on a Part with no item_type", () => {
+    const data = fixture("valid.yaml") as { parts: { draw_count?: number }[] };
+    data.parts[1].draw_count = 2;
+    expect(() => parseExamDefinition(data)).toThrow(
+      /'monologue'.*draw_count.*no item_type/,
+    );
+  });
+
+  it("rejects a draw_count below two", () => {
+    const data = fixture("valid.yaml") as {
+      parts: { item_type?: string; draw_count?: number }[];
+    };
+    data.parts[1].item_type = "monologue_subject";
+    data.parts[1].draw_count = 1;
+    expect(() => parseExamDefinition(data)).toThrow(/draw_count/);
+  });
+
+  it("rejects a draw_count on a question bank", () => {
+    const data = fixture("valid.yaml") as {
+      parts: { item_type?: string; draw_count?: number }[];
+    };
+    data.parts[1].item_type = "question_bank";
+    data.parts[1].draw_count = 2;
+    expect(() => parseExamDefinition(data)).toThrow(
+      /'monologue'.*question bank.*Draw/,
+    );
+  });
+
+  it("rejects a draw_count on a Part that no Prep Time covers", () => {
+    const data = fixture("valid.yaml") as {
+      parts: { item_type?: string; draw_count?: number }[];
+    };
+    data.parts[0].item_type = "monologue_subject";
+    data.parts[0].draw_count = 2;
+    expect(() => parseExamDefinition(data)).toThrow(
+      /'guided_interview'.*no Prep Time covers/,
+    );
+  });
 });

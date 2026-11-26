@@ -18,6 +18,7 @@ resolution-markers = [
 members = [
     "fromage-agent",
     "fromage-exam-definition",
+    "fromage-exam-engine",
     "fromage-grader",
     "fromage-item-checker",
     "fromage-item-generator",
@@ -835,6 +836,17 @@ requires-dist = [
     { name = "pydantic", specifier = ">=2.7" },
     { name = "pyyaml", specifier = ">=6" },
 ]
+
+[[package]]
+name = "fromage-exam-engine"
+version = "0.1.0"
+source = { editable = "packages/exam_engine" }
+dependencies = [
+    { name = "fromage-exam-definition" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "fromage-exam-definition", editable = "packages/exam_definition" }]
 
 [[package]]
 name = "fromage-grader"

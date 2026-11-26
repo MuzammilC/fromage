@@ -40,6 +40,14 @@ export function parseExamDefinition(data: unknown): ExamDefinition {
     }
   }
 
+  for (const part of definition.parts) {
+    if (part.draw_count !== undefined && part.item_type === undefined) {
+      problems.push(
+        `Part '${part.key}' has a draw_count but no item_type to draw`,
+      );
+    }
+  }
+
   const covered: string[] = [];
   for (const period of definition.prep_periods ?? []) {
     for (const part of period.parts) {
@@ -54,6 +62,20 @@ export function parseExamDefinition(data: unknown): ExamDefinition {
   }
   for (const key of duplicates(covered)) {
     problems.push(`Part '${key}' is covered by more than one Prep Time`);
+  }
+
+  for (const part of definition.parts) {
+    if (part.draw_count === undefined) continue;
+    if (part.item_type === "question_bank") {
+      problems.push(
+        `Part '${part.key}': a question bank cannot be offered as a Draw`,
+      );
+    }
+    if (!covered.includes(part.key)) {
+      problems.push(
+        `Part '${part.key}' has a draw_count but no Prep Time covers it`,
+      );
+    }
   }
 
   for (const criterion of definition.grid) {
