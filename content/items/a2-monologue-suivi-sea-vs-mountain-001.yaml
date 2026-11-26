@@ -1,0 +1,22 @@
+type: monologue_subject
+id: a2-monologue-suivi-sea-vs-mountain-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+  - sea_vs_mountain
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  "Vous parlez de vos vacances préférées : vous aimez mieux la mer ou la montagne ? Racontez
+  un bon souvenir de vacances et expliquez votre choix."
+suggested_angles:
+  - Où êtes-vous allé(e) et avec qui ?
+  - Quand y êtes-vous allé(e) et combien de temps êtes-vous resté(e) ?
+  - Qu'est-ce que vous avez fait là-bas (activités, repas, promenades) ?
+  - Pourquoi préférez-vous la mer ou la montagne ?
+  - Où voulez-vous partir pour vos prochaines vacances ?

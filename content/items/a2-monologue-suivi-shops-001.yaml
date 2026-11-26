@@ -1,0 +1,22 @@
+type: monologue_subject
+id: a2-monologue-suivi-shops-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+  - shops
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous parlez d'un magasin que vous aimez bien. Vous expliquez pourquoi vous y allez et
+  ce que vous aimez acheter là-bas.
+suggested_angles:
+  - Quel est ce magasin et où est-il ?
+  - Qu'est-ce que vous achetez dans ce magasin ?
+  - Qui vous accompagne et quel jour de la semaine ?
+  - "Racontez une visite : qu'est-ce que vous avez acheté la dernière fois ?"
+  - Pourquoi ce magasin est-il différent des autres ?

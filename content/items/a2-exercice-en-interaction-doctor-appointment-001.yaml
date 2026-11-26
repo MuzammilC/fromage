@@ -1,0 +1,46 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-doctor-appointment-001
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - doctor_appointment
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous êtes enrhumé(e) depuis trois jours et vous avez de la fièvre. Vous téléphonez au
+  cabinet du docteur Marchand pour obtenir un rendez-vous rapide. Vous parlez à la secrétaire médicale.
+examiner_role: Secrétaire médicale du cabinet du docteur Marchand (au téléphone)
+examiner_only_data:
+  cabinet: Cabinet du docteur Marchand, médecin généraliste
+  adresse: 3 rue de la Paix, 2e étage, à côté de la pharmacie
+  horaires_cabinet: Du lundi au vendredi, de 8 h 30 à 12 h 30 et de 14 h à 18 h
+  jour_de_l_appel: Mardi matin
+  disponibilites:
+    mardi: Plus de place aujourd'hui avant 17 h 15 ; un créneau libre à 17 h 15
+    mercredi: 9 h 00 ou 15 h 30
+    jeudi: Le docteur ne consulte pas le jeudi
+    vendredi: 10 h 45
+  duree_consultation: Environ 20 minutes
+  tarif: 26,50 euros, à payer à la fin de la consultation
+  paiement: Carte bancaire ou chèque, pas d'espèces
+  a_apporter: Carte Vitale et liste des médicaments déjà pris
+  nouveau_patient: Les nouveaux patients sont acceptés ; il faut donner nom, prénom et numéro de téléphone
+  annulation: Prévenir au moins 24 heures avant au 04 78 00 12 34
+  conseil_en_attendant: Se reposer ; l'examinateur ne donne pas d'autre conseil médical.
+  regle_si_candidat_ne_peut_pas:
+    Si le candidat refuse un créneau, proposer l'autre créneau disponible
+    le plus proche ; si aucun ne convient, proposer de le mettre sur liste d'attente en cas d'annulation
+expected_speech_acts:
+  - saluer et se présenter poliment
+  - expliquer ses symptômes simplement
+  - demander un rendez-vous rapide
+  - accepter ou refuser un horaire poliment
+  - donner son nom et son numéro de téléphone
+  - demander le prix ou ce qu'il faut apporter
+  - remercier et prendre congé
+register: formal

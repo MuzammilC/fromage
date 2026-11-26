@@ -1,0 +1,50 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-restaurant-001
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - restaurant
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous voulez réserver une table dans un restaurant pour fêter l'anniversaire d'un ami
+  samedi soir. Vous téléphonez au restaurant et vous parlez au serveur.
+examiner_role: Serveur dans un restaurant qui répond au téléphone
+examiner_only_data:
+  nom_restaurant: Le Petit Jardin
+  horaires: ouvert du mardi au dimanche, de 12h à 14h30 et de 19h à 22h30, fermé le lundi
+  disponibilites_samedi:
+    19h: complet
+    19h30: table pour 4 ou 5 personnes disponible
+    20h: table pour 6 personnes en terrasse seulement
+    21h30: toutes les tables libres
+  nombre_maximum_par_table: 8
+  menus:
+    menu_du_jour: non servi le samedi soir
+    menu_decouverte: 28 euros par personne, entrée + plat + dessert
+    menu_enfant: 12 euros, jusqu'à 10 ans
+  plats_vegetariens: oui, une lasagne aux légumes et une salade de chèvre chaud
+  gateau_anniversaire: possible si on prévient 24 heures avant, 3 euros par personne, bougies offertes
+  terrasse:
+    chauffée et ouverte le soir ; à 20h, seules les tables en terrasse sont disponibles, aux autres
+    heures le client choisit l'intérieur ou la terrasse
+  acompte: aucun acompte demandé
+  adresse: 8 rue du Marché, à côté de la poste, parking public gratuit à 50 mètres
+  informations_a_demander_au_client: nom, nombre de personnes, heure souhaitée, numéro de téléphone
+  delai_de_retard: la table est gardée 15 minutes après l'heure de réservation
+  paiement:
+    carte bancaire, espèces, chèques-restaurant acceptés; l'addition peut être séparée jusqu'à
+    4 paiements
+expected_speech_acts:
+  - saluer et se présenter poliment
+  - demander une réservation (jour, heure, nombre de personnes)
+  - répondre aux questions de l'interlocuteur (nom, téléphone)
+  - accepter ou refuser poliment un horaire proposé
+  - demander une information (menu, prix, plat végétarien ou gâteau)
+  - remercier et prendre congé
+register: formal

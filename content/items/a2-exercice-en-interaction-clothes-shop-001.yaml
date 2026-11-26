@@ -1,0 +1,63 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-clothes-shop-001
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - clothes_shop
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  "Vous êtes dans un magasin de vêtements. Vous cherchez une veste pour un anniversaire
+  samedi. Vous parlez au vendeur : vous demandez des informations (taille, couleur, prix) et vous décidez
+  si vous achetez la veste."
+examiner_role: Vendeur dans un magasin de vêtements
+examiner_only_data:
+  magasin: Mode Arc-en-Ciel
+  article_propose: veste légère en coton
+  couleurs_disponibles:
+    - bleu marine
+    - vert
+    - beige
+  couleur_en_rupture: noir
+  tailles_disponibles:
+    bleu marine:
+      - S
+      - M
+      - L
+    vert:
+      - M
+      - L
+    beige:
+      - S
+      - M
+  taille_en_rupture: XL dans toutes les couleurs
+  prix_normal: 49 euros
+  promotion: -20 % sur les vestes cette semaine, soit 39,20 euros
+  autre_article_conseille: chemise blanche à 25 euros
+  cabines_essayage: deux cabines au fond du magasin, à droite
+  modes_de_paiement:
+    - carte bancaire
+    - espèces
+    - chèque
+  echange: possible pendant 15 jours avec le ticket de caisse, article non porté
+  remboursement: non, seulement un bon d'achat
+  horaires: du lundi au samedi, de 9 h 30 à 19 h; fermé le dimanche
+  sac_cadeau: gratuit sur demande
+  retouches: non proposées
+  consignes_examinateur:
+    Si le candidat demande une couleur ou une taille indisponible, proposer une autre
+    couleur ou taille disponible. Si le candidat hésite, proposer d'essayer la veste en cabine. Si le
+    candidat demande une information absente de cette liste, répondre simplement que vous ne savez pas.
+expected_speech_acts:
+  - saluer le vendeur et expliquer ce que l'on cherche
+  - demander une taille et une couleur
+  - demander le prix
+  - demander à essayer la veste
+  - accepter ou refuser poliment une proposition
+  - remercier et prendre congé
+register: formal

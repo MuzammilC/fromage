@@ -1,0 +1,22 @@
+type: monologue_subject
+id: a2-monologue-suivi-books-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+  - books
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous parlez d'un livre que vous avez lu et que vous avez aimé. Vous expliquez pourquoi
+  ce livre est important pour vous.
+suggested_angles:
+  - Quel est le titre du livre et qui l'a écrit ?
+  - De quoi parle ce livre ? Qui sont les personnages ?
+  - Où et quand avez-vous lu ce livre ?
+  - Pourquoi avez-vous aimé ce livre ?
+  - Est-ce que vous allez conseiller ce livre à un ami ou lire un autre livre du même auteur ?

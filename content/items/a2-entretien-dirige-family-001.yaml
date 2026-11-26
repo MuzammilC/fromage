@@ -1,0 +1,23 @@
+type: question_bank
+id: a2-entretien-dirige-family-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - family
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - Vous avez une grande famille ou une petite famille ?
+  - Vous avez des frères et des sœurs ? Comment est-ce qu'ils s'appellent ?
+  - Combien de personnes il y a dans votre famille ?
+  - Vous habitez avec votre famille ou seul(e) ?
+  - Qu'est-ce que vous faites avec votre famille le week-end ?
+  - Quelle personne de votre famille est-ce que vous voyez souvent ? Pourquoi ?
+  - Est-ce que vous mangez ensemble en famille ? Parlez-moi d'un repas de famille.
+  - "Décrivez une personne de votre famille : comment elle est et qu'est-ce qu'elle aime faire ?"
+  - Pour vous, est-ce que la famille est importante ? Pourquoi ?

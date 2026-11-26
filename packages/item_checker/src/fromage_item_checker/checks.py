@@ -1,6 +1,7 @@
 import re
 from dataclasses import dataclass
 
+import yaml
 from fromage_exam_definition import ExamDefinition, Item, ItemError, parse_item
 
 
@@ -71,10 +72,34 @@ def _leaf_strings(value: object) -> list[str]:
     return [str(value)]
 
 
+def _content(item: Item) -> dict:
+    return item.root.model_dump(
+        mode="json",
+        exclude={"type", "id", "exam_definition", "part_key", "topics", "status", "version"}
+        | {"generation", "teacher_reviewed", "register"},
+    )
+
+
 def item_text(item: Item) -> str:
     """All the French text of an Item (not its metadata), one field per line."""
-    content = item.root.model_dump(
-        exclude={"type", "id", "exam_definition", "part_key", "topics", "status", "version"}
-        | {"generation", "teacher_reviewed", "register"}
-    )
-    return "\n".join(_leaf_strings(content))
+    return "\n".join(_leaf_strings(_content(item)))
+
+
+def level_text(item: Item) -> str:
+    """The Item's content with its field names, so the level check can tell what each value means."""
+    return yaml.safe_dump(_content(item), allow_unicode=True, sort_keys=False)
+
+
+def check_topics(item: Item, themes: dict[str, set[str]] | None) -> CheckResult:
+    """Every topic is a theme of the Item's Part in the Topic Taxonomy."""
+    if themes is None:
+        return CheckResult(
+            "topics", True, "no Topic Taxonomy for this Exam Definition", skipped=True
+        )
+    variant = item.root
+    part = getattr(variant.part_key, "root", variant.part_key)
+    topics = [getattr(t, "root", t) for t in getattr(variant.topics, "root", variant.topics)]
+    unknown = [t for t in topics if t not in themes.get(part, set())]
+    if unknown:
+        return CheckResult("topics", False, f"not in the Topic Taxonomy for {part}: {unknown}")
+    return CheckResult("topics", True)

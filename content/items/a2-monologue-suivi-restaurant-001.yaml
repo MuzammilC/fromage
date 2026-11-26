@@ -1,0 +1,22 @@
+type: monologue_subject
+id: a2-monologue-suivi-restaurant-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+  - restaurant
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous parlez d'un restaurant où vous avez mangé et que vous avez beaucoup aimé. Vous expliquez
+  pourquoi ce moment était agréable.
+suggested_angles:
+  - Où est ce restaurant et comment vous le connaissez ?
+  - Avec qui vous êtes allé(e) et quand ?
+  - Qu'est-ce que vous avez mangé et bu ?
+  - "Un souvenir de cette soirée : qu'est-ce qui s'est passé ?"
+  - Vous voulez y retourner un jour ? Avec qui ?

@@ -1,0 +1,53 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-job-interview-002
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - job_interview
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous cherchez un travail d'été dans un camping. Vous rencontrez le directeur du camping
+  pour un entretien. Vous vous présentez, vous parlez de ce que vous savez faire et vous posez des questions
+  sur le travail et les horaires.
+examiner_role: Directeur du camping Les Pins, qui reçoit un candidat pour un travail d'été
+examiner_only_data:
+  nom_camping: Camping Les Pins
+  nom_directeur: Monsieur ou Madame Martin
+  poste:
+    "Employé(e) polyvalent(e) : accueil des clients, nettoyage des sanitaires, aide à l'animation
+    pour les enfants"
+  periode: du 1er juillet au 31 août (deux mois)
+  horaires:
+    "du lundi au samedi, de 8 h à 14 h ou de 14 h à 20 h, selon la semaine ; un jour de repos
+    fixe : le dimanche"
+  salaire: 11,65 euros brut de l'heure, soit environ 1 400 euros net par mois
+  logement:
+    Pas de logement gratuit ; possibilité de louer un petit mobil-home du personnel à 150 euros
+    par mois
+  repas: Un repas gratuit par jour au restaurant du camping
+  transport:
+    Le camping est à 6 km du village ; pas de bus après 19 h ; un parking gratuit pour les employés
+    et un vélo est prêté si besoin
+  langues_utiles: Le français est obligatoire ; l'anglais est un plus car il y a des clients étrangers
+  experience: Pas d'expérience obligatoire ; la formation se fait pendant la première semaine
+  age_minimum: 18 ans
+  tenue: Un polo du camping est donné ; le candidat apporte son pantalon ou short et des chaussures fermées
+  documents_a_apporter:
+    Pièce d'identité, numéro de sécurité sociale, relevé d'identité bancaire (RIB)
+    le premier jour
+  reponse: Le directeur donne sa réponse par téléphone dans trois jours
+  date_de_debut_possible: Le candidat peut commencer le 1er juillet ou le 8 juillet au plus tard
+expected_speech_acts:
+  - saluer et se présenter
+  - parler de ses qualités et de ses expériences
+  - dire pourquoi on veut ce travail
+  - poser des questions sur les horaires et le salaire
+  - demander des précisions sur le logement ou le transport
+  - remercier et prendre congé
+register: formal

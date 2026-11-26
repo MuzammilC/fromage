@@ -1,0 +1,22 @@
+type: monologue_subject
+id: a2-monologue-suivi-workday-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+  - workday
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous parlez d'une journée de travail ou d'une journée d'école que vous aimez bien. Vous
+  expliquez ce que vous faites et pourquoi cette journée est agréable pour vous.
+suggested_angles:
+  - Quelle est cette journée (lundi, vendredi...) et où êtes-vous ?
+  - Que faites-vous le matin, à midi et l'après-midi ?
+  - Avec qui travaillez-vous ou mangez-vous ?
+  - "Un bon souvenir de cette journée : que s'est-il passé ?"
+  - Que voulez-vous changer ou garder dans cette journée plus tard ?

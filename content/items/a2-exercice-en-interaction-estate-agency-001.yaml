@@ -1,0 +1,57 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-estate-agency-001
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - estate_agency
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous cherchez un appartement à louer dans une ville française. Vous allez dans une agence
+  immobilière et vous parlez à l'agent. Vous posez des questions sur l'appartement (prix, taille, quartier)
+  et vous demandez si vous pouvez le visiter.
+examiner_role: Agent immobilier dans une agence de location
+examiner_only_data:
+  appartement:
+    type: 2 pièces (un salon et une chambre)
+    surface: 45 m²
+    etage: 3e étage avec ascenseur
+    adresse: 12 rue des Lilas, quartier Saint-Marc
+    loyer_mensuel: 620 euros
+    charges: 50 euros par mois (eau froide et entretien de l'immeuble)
+    chauffage: électrique, non compris dans les charges
+    cuisine: cuisine équipée (frigo, plaque de cuisson, four)
+    meuble: non, appartement vide
+    balcon: oui, petit balcon
+    cave_ou_parking: cave comprise, pas de parking
+    disponibilite: libre à partir du 1er du mois prochain
+    depot_de_garantie: 620 euros (un mois de loyer)
+    animaux: chats acceptés, chiens non acceptés
+    transports: arrêt de bus ligne 5 à 2 minutes à pied, tramway à 8 minutes à pied
+    commerces: boulangerie, supermarché et pharmacie à moins de 5 minutes à pied
+    visite:
+      jours_disponibles:
+        - mardi à 17 h 30
+        - jeudi à 10 h
+        - samedi à 11 h
+      duree: environ 20 minutes
+      lieu_rendez_vous: devant l'immeuble, au 12 rue des Lilas
+    documents_a_apporter:
+      - pièce d'identité
+      - trois derniers bulletins de salaire
+      - justificatif de domicile actuel
+    horaires_agence: du lundi au samedi, de 9 h à 18 h
+    frais_agence: 300 euros à payer à la signature du contrat
+expected_speech_acts:
+  - saluer et se présenter poliment
+  - expliquer ce que l'on cherche
+  - demander le prix du loyer et des charges
+  - poser des questions sur l'appartement ou le quartier
+  - demander une visite et choisir un jour ou une heure
+  - remercier et prendre congé
+register: formal

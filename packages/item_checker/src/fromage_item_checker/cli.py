@@ -7,10 +7,23 @@ from pathlib import Path
 
 import yaml
 from dotenv import load_dotenv
-from fromage_exam_definition import ExamDefinition, ExamDefinitionError, load_exam_definition
+from fromage_exam_definition import (
+    ExamDefinition,
+    ExamDefinitionError,
+    TaxonomyError,
+    load_exam_definition,
+    load_taxonomy,
+)
 
 from . import level
-from .checks import CheckResult, check_completeness, check_schema, item_text
+from .checks import (
+    CheckResult,
+    check_completeness,
+    check_schema,
+    check_topics,
+    item_text,
+    level_text,
+)
 from .overlap import DEFAULT_THRESHOLD, check_overlap, load_samples
 from .report import ItemReport, render_report
 
@@ -29,6 +42,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--items", type=Path, default=root and root / "content" / "items")
     parser.add_argument("--exams", type=Path, default=root and root / "content" / "exams")
     parser.add_argument(
+        "--taxonomy",
+        type=Path,
+        default=root and root / "content" / "taxonomy",
+        help="folder of Topic Taxonomy files (default: content/taxonomy)",
+    )
+    parser.add_argument(
         "--samples",
         type=Path,
         default=root and root / "content" / "fei-samples",
@@ -46,7 +65,13 @@ def main(argv: list[str] | None = None) -> int:
         "--no-llm", action="store_true", help="skip the level and playability check"
     )
     args = parser.parse_args(argv)
-    if args.items is None or args.exams is None or args.report is None or args.samples is None:
+    if (
+        args.items is None
+        or args.exams is None
+        or args.taxonomy is None
+        or args.report is None
+        or args.samples is None
+    ):
         print("Run check-items from a checkout of the repo.", file=sys.stderr)
         return 2
     if root:
@@ -75,8 +100,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"No Items found in {args.items}", file=sys.stderr)
         return 2
     definitions: dict[str, ExamDefinition | None] = {}
+    taxonomies = _load_taxonomies(args.taxonomy)
     reports = [
-        _check_file(path, args.exams, definitions, samples, args.threshold, checker)
+        _check_file(path, args.exams, definitions, taxonomies, samples, args.threshold, checker)
         for path in paths
     ]
 
@@ -94,6 +120,7 @@ def _check_file(
     path: Path,
     exams_dir: Path,
     definitions: dict[str, ExamDefinition | None],
+    taxonomies: dict[str, dict[str, set[str]]],
     samples: set[tuple[str, ...]] | None,
     threshold: float,
     checker: level.Checker | None,
@@ -114,11 +141,27 @@ def _check_file(
         return report
     text = item_text(schema.item)
     report.checks.append(check_completeness(schema.item))
+    ref = f"{definition.id}@{definition.version}"
+    report.checks.append(check_topics(schema.item, taxonomies.get(ref)))
     report.checks.append(check_overlap(text, samples, threshold))
     if checker is not None:
         report.level_asked = True
-        report.level = level.check_level(text, checker)
+        report.level = level.check_level(level_text(schema.item), checker)
     return report
+
+
+def _load_taxonomies(folder: Path) -> dict[str, dict[str, set[str]]]:
+    """Theme keys per Part, for each Exam Definition (`id@version`) that has a Topic Taxonomy."""
+    result: dict[str, dict[str, set[str]]] = {}
+    for path in sorted(folder.glob("*.yaml")):
+        try:
+            taxonomy = load_taxonomy(path)
+        except (OSError, TaxonomyError):
+            continue
+        result[taxonomy.exam_definition.root] = {
+            part.key.root: {theme.root.key.root for theme in part.themes} for part in taxonomy.parts
+        }
+    return result
 
 
 def _fail(name: str, detail: str) -> CheckResult:

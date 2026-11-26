@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Protocol
 
 DEFAULT_MODEL = "claude-haiku-5-5"
-MAX_TOKENS = 500
+MAX_TOKENS = 1000
 
 SYSTEM = """Tu relis un Item (un sujet) pour un simulateur d'examen oral de français, niveau CECRL A2.
 Réponds uniquement avec un objet JSON :
@@ -36,6 +36,7 @@ class AnthropicChecker:
         message = self._client.messages.create(
             model=self.model,
             max_tokens=MAX_TOKENS,
+            thinking={"type": "disabled"},  # thinking used the whole budget and left no answer
             system=system,
             messages=[{"role": "user", "content": user}],
         )

@@ -10,7 +10,7 @@ ITEM = {
     "id": "a2-monologue-suivi-logement-001",
     "exam_definition": "delf-a2-tp@1",
     "part_key": "monologue_suivi",
-    "topics": ["logement"],
+    "topics": ["housing"],
     "status": "draft",
     "version": 1,
     "generation": {"model": "m", "prompt_version": "p-v1", "date": "2026-11-24"},
@@ -101,3 +101,9 @@ def test_report_says_when_level_check_gave_no_answer(tmp_path, monkeypatch):
          "--exams", str(ROOT / "content" / "exams")]
     )  # fmt: skip
     assert "no usable answer" in report.read_text()
+
+
+def test_fails_on_topic_missing_from_taxonomy(tmp_path):
+    write(tmp_path, "bad", {**ITEM, "topics": ["logement"]})
+    assert run(tmp_path, tmp_path / "absent", tmp_path / "r.md") == 1
+    assert "topics" in (tmp_path / "r.md").read_text()

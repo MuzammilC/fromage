@@ -1,0 +1,22 @@
+type: monologue_subject
+id: a2-monologue-suivi-housing-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+  - housing
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous parlez de la maison ou de l'appartement où vous habitez maintenant. Vous expliquez
+  ce que vous aimez dans ce logement et ce que vous voulez changer.
+suggested_angles:
+  - Où se trouve votre logement et comment est-il (grand, petit, calme, lumineux) ?
+  - Avec qui vous habitez et quelles pièces vous utilisez le plus ?
+  - Ce que vous aimez le plus dans votre logement et pourquoi
+  - "Une anecdote : un bon ou un mauvais souvenir dans ce logement"
+  - "Un projet : ce que vous voulez changer ou le logement de vos rêves"

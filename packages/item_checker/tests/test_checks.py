@@ -144,3 +144,21 @@ def test_overlap_does_not_span_fields(tmp_path):
     samples = load_samples(tmp_path)
     assert check_overlap("un deux trois\nquatre cinq", samples).passed
     assert not check_overlap("un deux trois quatre cinq six sept huit neuf dix", samples).passed
+
+
+def test_level_text_keeps_field_names(a2):
+    from fromage_item_checker.checks import level_text
+
+    data = interaction(examiner_only_data={"parking": True, "prix": "10 euros"})
+    assert "parking: true" in level_text(check_schema(data, a2).item)
+
+
+def test_topics_must_be_taxonomy_themes_of_the_part(a2):
+    from fromage_item_checker.checks import check_topics
+
+    themes = {"exercice_en_interaction": {"estate_agency"}}
+    item = check_schema(interaction(topics=["estate_agency"]), a2).item
+    assert check_topics(item, themes).passed
+    bad = check_schema(interaction(topics=["logement"]), a2).item
+    assert not check_topics(bad, themes).passed
+    assert check_topics(bad, None).skipped

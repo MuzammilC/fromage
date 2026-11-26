@@ -1,0 +1,57 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-hotel-booking-001
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - hotel_booking
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous voulez passer un week-end à Annecy avec un ami. Vous téléphonez à un petit hôtel
+  pour réserver une chambre. Vous posez des questions sur la chambre, le prix et le petit-déjeuner.
+examiner_role: Réceptionniste de l'hôtel Les Mouettes à Annecy (au téléphone)
+examiner_only_data:
+  nom_hotel: Hôtel Les Mouettes
+  ville: Annecy
+  chambres_disponibles:
+    - type: chambre double avec deux lits séparés
+      prix_par_nuit: 78 euros
+      etage: 2e étage
+      vue: sur la cour intérieure
+      disponible_du_vendredi_au_dimanche: oui
+    - type: chambre double avec un grand lit
+      prix_par_nuit: 92 euros
+      etage: 3e étage
+      vue: sur le lac
+      disponible_du_vendredi_au_dimanche: oui
+    - type: chambre simple
+      disponible_du_vendredi_au_dimanche: non, complet
+  equipements_chambre: salle de bains privée, télévision, wifi gratuit
+  petit_dejeuner:
+    prix: 9 euros par personne
+    horaires: de 7 h 30 à 10 h
+    contenu: pain, croissants, confiture, café, thé, jus de fruits
+  ascenseur: oui
+  animaux: non acceptés
+  parking: payant, 10 euros par nuit, 6 places seulement, réservation conseillée
+  distance_lac: 5 minutes à pied
+  distance_gare: 10 minutes à pied
+  arrivee: à partir de 15 h
+  depart: avant 11 h
+  taxe_de_sejour: 1,50 euro par personne et par nuit, à payer sur place
+  annulation: gratuite jusqu'à 48 heures avant l'arrivée
+  paiement: carte bancaire ou espèces à l'arrivée, aucun paiement à l'avance
+  informations_demandees_pour_reserver: nom, prénom, numéro de téléphone, heure d'arrivée approximative
+expected_speech_acts:
+  - saluer et se présenter poliment
+  - exprimer son besoin (réserver une chambre pour deux personnes, deux nuits)
+  - demander le prix et les caractéristiques de la chambre
+  - demander des renseignements (petit-déjeuner, parking, horaires)
+  - choisir une option et confirmer la réservation
+  - donner ses coordonnées et remercier
+register: formal

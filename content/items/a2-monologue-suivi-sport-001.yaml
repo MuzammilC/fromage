@@ -1,0 +1,22 @@
+type: monologue_subject
+id: a2-monologue-suivi-sport-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+  - sport
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous parlez d'un sport que vous pratiquez ou que vous avez pratiqué. Vous expliquez pourquoi
+  il vous plaît et comment vous le pratiquez.
+suggested_angles:
+  - Quel sport vous aimez et depuis quand vous le pratiquez
+  - Où et avec qui vous faites ce sport
+  - Pourquoi ce sport vous plaît
+  - Un bon souvenir au passé (un match, une sortie, une première fois)
+  - Un projet pour l'année prochaine (un cours, un voyage, une compétition)

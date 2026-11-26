@@ -1,0 +1,22 @@
+type: question_bank
+id: a2-entretien-dirige-friends-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - friends
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - Comment s'appelle votre meilleur ami ou votre meilleure amie ?
+  - Où est-ce que vous avez rencontré cette personne ?
+  - Vous avez beaucoup d'amis dans votre ville ?
+  - Qu'est-ce que vous aimez faire avec vos amis le week-end ?
+  - Vous préférez sortir avec un grand groupe d'amis ou avec une seule personne ? Pourquoi ?
+  - "Comment est-ce que vous parlez avec vos amis : par téléphone, par message ou en personne ?"
+  - Comment est-ce que vous fêtez votre anniversaire avec vos amis ?
+  - Pour vous, c'est quoi un bon ami ? Expliquez.

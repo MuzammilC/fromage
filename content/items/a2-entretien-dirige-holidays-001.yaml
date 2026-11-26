@@ -1,0 +1,23 @@
+type: question_bank
+id: a2-entretien-dirige-holidays-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - holidays
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - Quand est-ce que vous avez des vacances pendant l'année ?
+  - En général, vous partez en vacances ou vous restez chez vous ?
+  - Avec qui est-ce que vous aimez partir en vacances ?
+  - Vous préférez les vacances à la mer, à la montagne ou à la campagne ? Pourquoi ?
+  - "Comment est-ce que vous voyagez pour partir en vacances : en voiture, en train ou en avion ?"
+  - Qu'est-ce que vous faites pendant vos vacances ?
+  - "Où est-ce que vous dormez quand vous partez : à l'hôtel, chez des amis ou dans un camping ?"
+  - Racontez-moi vos dernières vacances. Où êtes-vous allé(e) et qu'est-ce que vous avez fait ?
+  - Quel est votre pays ou votre ville de rêve pour des vacances ? Pourquoi ?

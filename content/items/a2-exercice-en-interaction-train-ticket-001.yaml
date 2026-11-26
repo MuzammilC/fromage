@@ -1,0 +1,63 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-train-ticket-001
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - train_ticket
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous êtes à la gare de Lyon-Perrache. Vous voulez aller à Grenoble samedi prochain avec
+  votre sœur. Vous parlez à l'employé du guichet pour choisir un train et acheter les billets.
+examiner_role: Employé du guichet de la gare (vouvoiement)
+examiner_only_data:
+  destination: Grenoble
+  date: samedi prochain
+  trains_disponibles:
+    - depart: 08h12
+      arrivee: 09h48
+      duree: 1h36
+      prix_plein_tarif_par_personne: 21 euros
+      remarque: train direct, peu de monde
+    - depart: 10h35
+      arrivee: 12h11
+      duree: 1h36
+      prix_plein_tarif_par_personne: 27 euros
+      remarque: train direct, souvent complet le samedi
+    - depart: 13h05
+      arrivee: 15h20
+      duree: 2h15
+      prix_plein_tarif_par_personne: 18 euros
+      remarque: avec un changement à Saint-André-le-Gaz, 8 minutes de correspondance
+  voyageurs: 2 adultes
+  reductions:
+    "Carte Avantage Jeune (12-27 ans): 30 % de réduction, carte à 49 euros par an, valable un
+    an. Pas de réduction sans carte pour les adultes."
+  aller_retour:
+    "Possible. Le prix de l'aller-retour est le prix de l'aller plus le prix du retour choisi.
+    Retours possibles depuis Grenoble le samedi : 17h40 (arrivée à Lyon-Perrache 19h16, 25 euros par personne)
+    ou 19h50 (arrivée à Lyon-Perrache 21h26, 21 euros par personne)."
+  places: Places disponibles dans tous les trains, côté fenêtre ou côté couloir au choix.
+  billet_modifiable:
+    Billet échangeable gratuitement jusqu'à la veille du départ, avec une petite pénalité
+    de 12 euros le jour du départ. Billet non remboursable.
+  paiement: Carte bancaire, espèces ou chèque.
+  billet_format: Billet papier ou billet sur téléphone (e-billet envoyé par e-mail).
+  quai:
+    Le quai est annoncé 20 minutes avant le départ sur les panneaux. Le train de 08h12 part en général
+    de la voie A.
+  bagages: Un grand bagage et un petit sac par personne, sans supplément.
+  heure_ouverture_guichet: Guichet ouvert de 6h30 à 20h30 tous les jours.
+expected_speech_acts:
+  - saluer et exposer son besoin (destination, date)
+  - demander des informations sur les horaires et la durée
+  - demander le prix du billet pour deux personnes
+  - choisir un train et justifier son choix
+  - demander un aller-retour ou l'heure du train retour
+  - remercier et prendre congé
+register: formal

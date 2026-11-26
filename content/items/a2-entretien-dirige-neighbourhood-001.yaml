@@ -1,0 +1,23 @@
+type: question_bank
+id: a2-entretien-dirige-neighbourhood-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - neighbourhood
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - Vous habitez dans quel quartier ?
+  - Il y a des magasins près de chez vous ? Lesquels ?
+  - "Comment est votre quartier : calme ou bruyant ?"
+  - Vous connaissez vos voisins ? Vous parlez avec eux ?
+  - Qu'est-ce que vous aimez dans votre quartier ?
+  - Comment allez-vous au centre-ville depuis chez vous ?
+  - Qu'est-ce que vous faites dans votre quartier le week-end ?
+  - Il y a un parc ou un endroit pour se promener près de chez vous ? Vous y allez souvent ?
+  - Si vous pouvez changer une chose dans votre quartier, qu'est-ce que vous changez ? Pourquoi ?

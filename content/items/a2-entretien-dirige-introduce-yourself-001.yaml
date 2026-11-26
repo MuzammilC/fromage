@@ -1,0 +1,24 @@
+type: question_bank
+id: a2-entretien-dirige-introduce-yourself-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - introduce_yourself
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - Comment vous appelez-vous ?
+  - Quel âge avez-vous ?
+  - Vous venez de quel pays et de quelle ville ?
+  - Où habitez-vous maintenant ? Vous habitez dans une maison ou dans un appartement ?
+  - Vous parlez quelles langues ?
+  - Est-ce que vous travaillez ou est-ce que vous étudiez ? Qu'est-ce que vous faites ?
+  - Parlez-moi de votre famille. Qui habite avec vous ?
+  - Qu'est-ce que vous aimez faire pendant votre temps libre ?
+  - Pourquoi apprenez-vous le français ?
+  - Décrivez-moi une journée normale pour vous, du matin au soir.
