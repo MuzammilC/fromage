@@ -1,5 +1,5 @@
 [tool.uv.workspace]
-members = ["apps/agent", "apps/grader", "packages/exam_definition", "packages/item_generator", "packages/item_checker"]
+members = ["apps/agent", "apps/grader", "packages/exam_definition", "packages/item_generator", "packages/item_checker", "packages/exam_engine"]
 
 [tool.uv]
 dev-dependencies = ["pytest>=8", "ruff>=0.8", "datamodel-code-generator>=0.26"]

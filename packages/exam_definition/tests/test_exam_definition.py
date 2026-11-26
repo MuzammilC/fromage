@@ -60,3 +60,37 @@ def test_duration_range_with_min_above_max_is_rejected():
     data["parts"][0]["target_duration_seconds"] = {"min": 200, "max": 100}
     with pytest.raises(ExamDefinitionError, match=r"guided_interview.*min 200.*max 100"):
         parse_exam_definition(data)
+
+
+def test_draw_count_with_an_item_type_is_accepted():
+    data = _valid()
+    data["parts"][1].update({"item_type": "monologue_subject", "draw_count": 2})
+    assert parse_exam_definition(data).parts[1].draw_count == 2
+
+
+def test_draw_count_without_an_item_type_is_rejected():
+    data = _valid()
+    data["parts"][1]["draw_count"] = 2
+    with pytest.raises(ExamDefinitionError, match=r"'monologue'.*draw_count.*no item_type"):
+        parse_exam_definition(data)
+
+
+def test_draw_count_below_two_is_rejected():
+    data = _valid()
+    data["parts"][1].update({"item_type": "monologue_subject", "draw_count": 1})
+    with pytest.raises(ExamDefinitionError, match="draw_count"):
+        parse_exam_definition(data)
+
+
+def test_draw_count_on_a_question_bank_is_rejected():
+    data = _valid()
+    data["parts"][1].update({"item_type": "question_bank", "draw_count": 2})
+    with pytest.raises(ExamDefinitionError, match=r"'monologue'.*question bank.*Draw"):
+        parse_exam_definition(data)
+
+
+def test_draw_count_on_a_part_with_no_prep_time_is_rejected():
+    data = _valid()
+    data["parts"][0].update({"item_type": "monologue_subject", "draw_count": 2})
+    with pytest.raises(ExamDefinitionError, match=r"'guided_interview'.*no Prep Time covers"):
+        parse_exam_definition(data)

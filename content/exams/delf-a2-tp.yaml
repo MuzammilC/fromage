@@ -8,15 +8,20 @@ parts:
   - key: entretien_dirige
     target_duration_seconds: { min: 90, max: 90 }
     turn_mode: interactive
+    announcement: "Nous commençons par l'entretien dirigé. Je vais vous poser quelques questions sur vous."
     item_type: question_bank
   - key: monologue_suivi
     target_duration_seconds: { min: 120, max: 120 }
     turn_mode: listen_only
+    announcement: "Passons au monologue suivi. Parlez du sujet que vous avez choisi. Je vous écoute."
     item_type: monologue_subject
+    draw_count: 2
   - key: exercice_en_interaction
     target_duration_seconds: { min: 180, max: 240 }
     turn_mode: interactive
+    announcement: "Nous passons à l'exercice en interaction. Vous allez jouer la situation que vous avez choisie avec moi."
     item_type: interaction_situation
+    draw_count: 2
 # One 10-minute Prep Time before the live test, shared by Parts 2 and 3.
 prep_periods:
   - time_seconds: 600

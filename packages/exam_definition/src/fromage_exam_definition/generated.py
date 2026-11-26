@@ -96,6 +96,20 @@ class Part(BaseModel):
         ItemType | None,
         Field(description="The one Item type a Candidate is given in this Part."),
     ] = None
+    announcement: Annotated[
+        str | None,
+        Field(
+            description="The fixed French line the Examiner says when this Part starts. Omit to use a generic line.",
+            min_length=1,
+        ),
+    ] = None
+    draw_count: Annotated[
+        int | None,
+        Field(
+            description="How many Items the Candidate is offered in a Draw for this Part, keeping one. Omit when the Part has no Draw. Needs an item_type.",
+            ge=2,
+        ),
+    ] = None
 
 
 class Criterion(BaseModel):

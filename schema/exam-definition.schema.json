@@ -43,6 +43,16 @@
             "monologue_subject",
             "interaction_situation"
           ]
+        },
+        "announcement": {
+          "description": "The fixed French line the Examiner says when this Part starts. Omit to use a generic line.",
+          "type": "string",
+          "minLength": 1
+        },
+        "draw_count": {
+          "description": "How many Items the Candidate is offered in a Draw for this Part, keeping one. Omit when the Part has no Draw. Needs an item_type.",
+          "type": "integer",
+          "minimum": 2
         }
       }
     },
