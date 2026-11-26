@@ -1,0 +1,53 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-mountain-holiday-003
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - mountain_holiday
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  "Vous êtes en vacances à la montagne avec un ami français. Dimanche, vous voulez faire
+  une activité ensemble. Vous discutez avec lui : vous proposez une idée, vous posez des questions (heure,
+  prix, ce qu'il faut prendre) et vous choisissez ensemble un rendez-vous."
+examiner_role:
+  Un ami français en vacances avec le candidat, qui a regardé quelques idées d'activités
+  pour dimanche
+examiner_only_data:
+  prenom_ami: Julien
+  activites_possibles:
+    randonnee_lac_bleu:
+      depart: parking du village, à 9h00
+      duree: 3 heures aller-retour, avec une pause au lac
+      prix: gratuit
+      niveau: facile, chemin large, un peu de montée au début
+      a_prendre: chaussures de marche, bouteille d'eau (1,5 litre), pique-nique, veste chaude, crème solaire
+    luge_d_ete:
+      horaires: de 10h à 17h
+      prix: 8 euros la descente ou 20 euros pour 3 descentes
+      remarque: agréable mais assez court, environ 1 heure en tout avec l'attente
+    visite_ferme_fromage:
+      horaires_visites: 10h30 et 15h00
+      prix: 5 euros par personne, dégustation comprise
+      duree: 1 heure
+  meteo_dimanche: soleil le matin, risque d'orage après 15h00
+  transport: Julien a une voiture, le parking du village est à 20 minutes du chalet
+  rendez_vous_possible: devant le chalet à 8h30 pour la randonnée
+  preferences_de_julien:
+    préfère la randonnée mais accepte une autre idée si le candidat propose bien
+    ; n'aime pas se lever trop tôt mais accepte 8h30 ; peut acheter le pain et le fromage au village pour
+    le pique-nique
+  budget: ils veulent dépenser peu
+expected_speech_acts:
+  - proposer une activité
+  - demander une heure et une durée
+  - demander un prix
+  - demander ce qu'il faut prendre
+  - accepter ou refuser poliment une idée
+  - fixer un rendez-vous
+register: informal

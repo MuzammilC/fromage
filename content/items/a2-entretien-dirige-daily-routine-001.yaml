@@ -1,0 +1,23 @@
+type: question_bank
+id: a2-entretien-dirige-daily-routine-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - daily_routine
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - À quelle heure est-ce que vous vous levez le matin ?
+  - Qu'est-ce que vous mangez au petit-déjeuner ?
+  - Comment est-ce que vous allez au travail ou à l'école ?
+  - Où est-ce que vous déjeunez à midi ?
+  - Qu'est-ce que vous faites après le travail ou après les cours ?
+  - Est-ce que vous préparez le dîner à la maison ? Qu'est-ce que vous aimez cuisiner ?
+  - À quelle heure est-ce que vous vous couchez ? Qu'est-ce que vous faites avant de dormir ?
+  - Quelle est la différence entre vos journées de la semaine et votre dimanche ?
+  - Quel moment de la journée est-ce que vous préférez ? Pourquoi ?

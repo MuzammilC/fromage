@@ -1,0 +1,73 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-job-interview-003
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - job_interview
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous cherchez un travail le soir pour gagner un peu d'argent pendant vos études. Vous
+  êtes dans un restaurant pour un entretien avec le patron, qui cherche un serveur ou une serveuse. Vous
+  parlez de vous et de votre expérience, vous demandez des informations sur le travail (jours, horaires,
+  salaire) et vous dites si le poste vous intéresse.
+examiner_role:
+  Le patron d'un petit restaurant de quartier qui cherche un serveur ou une serveuse pour
+  le soir
+examiner_only_data:
+  restaurant:
+    nom: Chez Marcel
+    type: restaurant de cuisine traditionnelle française, environ 30 places
+    adresse: 25 avenue Victor Hugo
+  poste:
+    intitule: serveur ou serveuse
+    contrat: contrat à durée déterminée de 3 mois, renouvelable
+    date_de_debut: lundi de la semaine prochaine
+    experience_necessaire:
+      pas obligatoire, une personne sympathique et motivée sera formée pendant la
+      première semaine
+  jours_et_horaires:
+    jours_de_travail:
+      "3 soirs par semaine : jeudi, vendredi et samedi, avec possibilité d'ajouter le
+      dimanche midi si la personne le souhaite"
+    horaires: de 18 h 30 à 23 h 30
+    jour_de_fermeture_du_restaurant: lundi et mardi
+  salaire:
+    montant: 11,88 euros brut de l'heure, soit environ 9,50 euros net
+    pourboires: partagés entre l'équipe
+    paiement: à la fin de chaque mois par virement
+  avantages:
+    repas: un repas gratuit avant le service, vers 18 h
+    transport:
+      le restaurant est à 5 minutes à pied de l'arrêt de tramway Place Verte, dernier tramway
+      à 0 h 15
+  tenue:
+    pantalon noir et chaussures noires fournis par la personne ; chemise blanche avec le nom du restaurant
+    fournie par le patron
+  equipe: le patron, un cuisinier, une autre serveuse (Julie) et un plongeur
+  qualites_recherchees:
+    être ponctuel, souriant, poli avec les clients, savoir porter plusieurs assiettes,
+    comprendre un peu l'anglais est un plus
+  questions_possibles_du_patron:
+    - Comment vous appelez-vous ?
+    - Qu'est-ce que vous faites dans la vie ?
+    - Est-ce que vous avez déjà travaillé dans un restaurant ?
+    - Pourquoi voulez-vous ce travail ?
+    - Est-ce que vous êtes libre le jeudi, le vendredi et le samedi soir ?
+  suite_de_la_procedure:
+    si le candidat est intéressé, le patron propose un essai gratuit d'une soirée
+    le jeudi suivant à 18 h ; il donne sa réponse définitive le lendemain par téléphone
+expected_speech_acts:
+  - saluer et se présenter
+  - parler de son expérience et de ses qualités
+  - demander des informations sur les jours et les horaires de travail
+  - demander le salaire
+  - dire que le poste est intéressant ou non, et donner une raison
+  - accepter ou refuser poliment la proposition d'essai
+  - remercier et prendre congé
+register: formal

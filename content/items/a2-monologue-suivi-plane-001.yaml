@@ -1,0 +1,22 @@
+type: monologue_subject
+id: a2-monologue-suivi-plane-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+  - plane
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous parlez d'un voyage en avion que vous avez fait. Vous expliquez où vous êtes allé(e)
+  et ce que vous avez aimé.
+suggested_angles:
+  - Où êtes-vous allé(e) ?
+  - Avec qui avez-vous voyagé ? Pourquoi ce voyage ?
+  - Comment était le voyage en avion (l'aéroport, le vol, les repas) ?
+  - "Une anecdote : un moment drôle ou surprenant pendant le voyage."
+  - "Un projet : prendre l'avion encore une fois, pour aller où ?"

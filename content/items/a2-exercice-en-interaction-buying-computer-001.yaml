@@ -1,0 +1,71 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-buying-computer-001
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - buying_computer
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous voulez acheter un ordinateur portable pour vos études et pour écrire à votre famille.
+  Vous allez dans un magasin et vous parlez au vendeur. Vous demandez des informations et vous choisissez
+  un ordinateur.
+examiner_role: Vendeur dans un magasin d'informatique
+examiner_only_data:
+  magasin: InfoPlus, ouvert du mardi au samedi de 10 h à 19 h
+  modeles:
+    - nom: Lumo 14
+      prix_euros: 399
+      ecran_pouces: 14
+      poids_kg: 1.6
+      memoire: 4 Go
+      stockage: 128 Go
+      autonomie_batterie_heures: 8
+      couleurs:
+        - gris
+        - bleu
+      disponibilite: en stock
+    - nom: Norva 15
+      prix_euros: 549
+      ecran_pouces: 15.6
+      poids_kg: 1.9
+      memoire: 8 Go
+      stockage: 256 Go
+      autonomie_batterie_heures: 10
+      couleurs:
+        - gris
+        - noir
+      disponibilite: en stock en gris, noir disponible dans 5 jours
+    - nom: Zéphyr 13
+      prix_euros: 729
+      ecran_pouces: 13
+      poids_kg: 1.2
+      memoire: 16 Go
+      stockage: 512 Go
+      autonomie_batterie_heures: 12
+      couleurs:
+        - argent
+      disponibilite: en stock
+  garantie: 2 ans pour tous les modèles
+  accessoires:
+    - nom: sacoche de transport
+      prix_euros: 25
+    - nom: souris sans fil
+      prix_euros: 12
+  offre_etudiant: 10 % de réduction sur l'ordinateur avec une carte d'étudiant
+  paiement: carte bancaire, espèces ou paiement en 3 fois sans frais à partir de 300 euros
+  livraison: gratuite à domicile en 3 jours, ou retrait immédiat en magasin
+  logiciel_inclus: traitement de texte et messagerie installés sur tous les modèles
+expected_speech_acts:
+  - saluer le vendeur et expliquer son besoin
+  - demander des informations sur les modèles (prix, taille, poids, batterie)
+  - comparer et exprimer une préférence
+  - demander s'il y a une réduction ou une garantie
+  - choisir un ordinateur et dire comment payer
+  - remercier et prendre congé
+register: formal

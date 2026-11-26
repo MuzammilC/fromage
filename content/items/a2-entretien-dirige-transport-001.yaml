@@ -1,0 +1,25 @@
+type: question_bank
+id: a2-entretien-dirige-transport-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - transport
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - Comment allez-vous à votre travail ou à votre école ?
+  - Est-ce que vous avez une voiture, un vélo ou une moto ?
+  - Il y a un arrêt de bus ou une station de métro près de chez vous ?
+  - Combien de temps dure votre trajet pour aller à l'école ou au travail ?
+  - "Quel transport est-ce que vous préférez : le bus, le train ou la voiture ? Pourquoi ?"
+  - Vous prenez le train ou l'avion pour partir en vacances ? Racontez.
+  - Est-ce que vous marchez beaucoup dans la journée ? Où est-ce que vous aimez marcher ?
+  - Dans votre ville, est-ce que les transports sont pratiques ? Qu'est-ce que vous aimez ou n'aimez pas
+    ?
+  - Vous voulez visiter une nouvelle ville avec un ami. Quel transport est-ce que vous choisissez ? Pourquoi
+    ?

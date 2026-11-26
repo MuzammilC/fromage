@@ -1,0 +1,22 @@
+type: question_bank
+id: a2-entretien-dirige-home-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - home
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - Vous habitez dans une maison ou dans un appartement ?
+  - Vous habitez avec qui ?
+  - Combien de pièces y a-t-il chez vous ?
+  - Quelle est votre pièce préférée ? Pourquoi ?
+  - Qu'est-ce qu'il y a dans votre chambre ?
+  - Est-ce que vous aimez votre quartier ? Pourquoi ?
+  - Qu'est-ce que vous faites chez vous le week-end ?
+  - Comment est votre logement idéal ? Décrivez-le.

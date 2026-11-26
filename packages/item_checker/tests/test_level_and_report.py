@@ -57,3 +57,20 @@ def test_report_is_readable_and_shows_advisory_separately():
     assert "Prix manquant" in text
     assert "advisory" in text.lower()
     assert "FEI samples folder absent" in text
+
+
+def test_anthropic_checker_leaves_room_for_an_answer(monkeypatch):
+    import anthropic
+    from fromage_item_checker.level import AnthropicChecker
+
+    sent = {}
+
+    class Messages:
+        def create(self, **kwargs):
+            sent.update(kwargs)
+            return type("M", (), {"content": []})()
+
+    monkeypatch.setattr(anthropic, "Anthropic", lambda: type("C", (), {"messages": Messages()})())
+    AnthropicChecker().complete("s", "u")
+    assert sent["thinking"] == {"type": "disabled"}  # thinking once used all 500 tokens
+    assert sent["max_tokens"] >= 1000

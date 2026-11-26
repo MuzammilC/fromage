@@ -1,0 +1,63 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-bus-station-001
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - bus_station
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous êtes à la gare routière d'une ville française. Vous voulez aller voir des amis à
+  Lyon samedi prochain. Vous parlez à l'employé du guichet pour avoir des informations et acheter votre
+  billet.
+examiner_role: Employé(e) du guichet d'une gare routière
+examiner_only_data:
+  destination: Lyon
+  jour_du_voyage: samedi prochain
+  departs_samedi:
+    - heure_depart: 07h40
+      heure_arrivee: 11h55
+      prix_adulte_euros: 19
+      remarque: départ le plus tôt
+    - heure_depart: 10h15
+      heure_arrivee: 14h30
+      prix_adulte_euros: 24
+      remarque: bus direct, le plus demandé
+    - heure_depart: 16h50
+      heure_arrivee: 21h05
+      prix_adulte_euros: 19
+      remarque: dernier départ de la journée
+  duree_trajet: 4h15 pour tous les départs
+  quai_depart: quai 6 pour tous les départs, à confirmer 15 minutes avant le départ sur l'écran
+  arret_arrivee: gare routière de Lyon Perrache
+  retour_possible:
+    depart_de_Lyon_Perrache_dimanche:
+      dimanche_18h30: arrivée à 22h45, 24 euros
+      dimanche_20h00: arrivée à 00h15, 19 euros
+    arrivee: dans la ville de la gare routière où se trouve le candidat
+  prix_aller_retour: le prix de l'aller-retour est la somme de l'aller et du retour moins 3 euros de réduction
+  tarif_reduit:
+    20 % de réduction pour les moins de 26 ans et les plus de 60 ans, sur présentation d'une
+    pièce d'identité
+  bagages:
+    une valise en soute et un petit sac à main ou à dos en cabine, gratuits; valise supplémentaire
+    5 euros
+  paiement: carte bancaire ou espèces, pas de chèque
+  billet: billet imprimé au guichet ou billet électronique envoyé par e-mail
+  echange_annulation: échange gratuit jusqu'à 24 heures avant le départ; ensuite, pas de remboursement
+  places_disponibles: il reste des places sur tous les départs de samedi
+  services_dans_le_bus: toilettes, prises électriques, pas de wifi
+  pause: une pause de 15 minutes à mi-parcours
+expected_speech_acts:
+  - saluer et se faire comprendre poliment
+  - demander les horaires des bus pour Lyon
+  - demander le prix du billet
+  - choisir un horaire et justifier son choix
+  - demander des informations pratiques (quai, bagages, durée)
+  - remercier et prendre congé
+register: formal

@@ -1,0 +1,22 @@
+type: monologue_subject
+id: a2-monologue-suivi-friends-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+  - friends
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous parlez d'un ami ou d'une amie qui compte beaucoup pour vous. Vous expliquez comment
+  vous vous êtes connus et ce que vous aimez faire ensemble.
+suggested_angles:
+  - Qui est cette personne ? (nom, âge, métier ou études)
+  - Où et quand vous vous êtes rencontrés
+  - Les activités que vous faites ensemble (sortie, sport, cuisine, voyage...)
+  - Un bon souvenir passé avec cette personne
+  - Un projet que vous voulez faire ensemble

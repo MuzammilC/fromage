@@ -1,0 +1,63 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-choosing-theatre-show-001
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - choosing_theatre_show
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous voulez sortir au théâtre avec un ami ou une amie ce mois-ci. Vous téléphonez au
+  guichet du théâtre municipal pour choisir un spectacle et réserver vos places. Vous parlez avec l'employé
+  du théâtre.
+examiner_role: Employé(e) du guichet du théâtre municipal, au téléphone, poli(e) et serviable
+examiner_only_data:
+  nom_theatre: Théâtre des Tilleuls
+  spectacles:
+    - titre: Le Voyage de Léo
+      genre: comédie pour toute la famille
+      duree: 1 h 15
+      dates_horaires: samedi 12 à 20 h 30 et dimanche 13 à 16 h
+      prix_plein_tarif: 18 euros
+      prix_reduit: 12 euros (étudiants, moins de 26 ans, demandeurs d'emploi, sur présentation d'un justificatif)
+      places_disponibles: "samedi : 6 places ; dimanche : 15 places"
+    - titre: Une soirée à Venise
+      genre: pièce romantique avec musique
+      duree: 1 h 45 avec entracte de 15 minutes
+      dates_horaires: vendredi 18 à 20 h 30 et samedi 19 à 20 h 30
+      prix_plein_tarif: 25 euros
+      prix_reduit: 16 euros (mêmes conditions)
+      places_disponibles: "vendredi : 3 places ; samedi : complet"
+    - titre: Le Noir et le Blanc
+      genre: spectacle de mime et de danse, sans paroles
+      duree: 1 h
+      dates_horaires: jeudi 24 à 19 h 30
+      prix_plein_tarif: 15 euros
+      prix_reduit: 10 euros (mêmes conditions)
+      places_disponibles: 20 places
+  reservation:
+    Possible par téléphone avec nom et numéro de téléphone du client ; les places sont gardées
+    48 heures puis doivent être payées au guichet ou en ligne
+  paiement: carte bancaire, espèces ou chèque au guichet uniquement
+  retrait_billets: Les billets se retirent au guichet 30 minutes avant le spectacle, avec une pièce d'identité
+  horaires_guichet: du mardi au samedi, de 14 h à 18 h
+  adresse: 12 rue des Tilleuls, à 5 minutes à pied de la gare
+  parking: parking public gratuit à côté du théâtre, 40 places
+  accessibilite: salle accessible aux personnes à mobilité réduite
+  regles_salle:
+    pas d'entrée après le début du spectacle ; boissons et sandwichs interdits dans la salle
+    ; bar ouvert avant le spectacle et pendant l'entracte
+expected_speech_acts:
+  - saluer et se présenter poliment
+  - expliquer le but de l'appel (vouloir réserver un spectacle)
+  - demander des informations sur les spectacles (genre, date, heure)
+  - demander un prix
+  - exprimer un choix et une préférence
+  - réserver des places en donnant son nom et en indiquant le nombre de places
+  - remercier et prendre congé
+register: formal

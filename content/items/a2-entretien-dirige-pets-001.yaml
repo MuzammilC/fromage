@@ -1,0 +1,24 @@
+type: question_bank
+id: a2-entretien-dirige-pets-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - pets
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - Est-ce que vous aimez les animaux ?
+  - Est-ce que vous avez un animal à la maison ?
+  - Quel animal est-ce que vous préférez ? Pourquoi ?
+  - Comment s'appelle un animal que vous connaissez (le vôtre, ou celui d'un ami) ?
+  - Qu'est-ce que cet animal mange et boit ?
+  - Qui s'occupe de cet animal ? Qu'est-ce que cette personne fait chaque jour ?
+  - Est-ce que vous jouez ou vous vous promenez avec cet animal ? Racontez.
+  - Dans votre pays, quels sont les animaux les plus courants dans les maisons ?
+  - Est-ce qu'il est facile d'avoir un animal quand on habite en appartement ? Pourquoi ?
+  - Quel animal est-ce que vous voulez avoir un jour ? Pourquoi ?

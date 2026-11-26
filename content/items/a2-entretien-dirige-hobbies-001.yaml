@@ -1,0 +1,21 @@
+type: question_bank
+id: a2-entretien-dirige-hobbies-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - hobbies
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - Quel est votre passe-temps préféré ?
+  - Est-ce que vous aimez le sport ? Quel sport faites-vous ?
+  - Qu'est-ce que vous faites pendant votre temps libre le week-end ?
+  - Vous préférez faire vos loisirs seul(e) ou avec des amis ? Pourquoi ?
+  - Est-ce que vous avez un loisir depuis longtemps ? Depuis quand ?
+  - Est-ce que vous allez au cinéma, au musée ou au concert ? Parlez-moi de votre dernière sortie.
+  - Quel nouveau loisir est-ce que vous voulez essayer un jour ? Pourquoi ?

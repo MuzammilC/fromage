@@ -1,0 +1,22 @@
+type: monologue_subject
+id: a2-monologue-suivi-cinema-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+  - cinema
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous parlez d'un film que vous avez vu et que vous avez beaucoup aimé. Vous racontez
+  ce que vous avez vu et vous expliquez pourquoi ce film est important pour vous.
+suggested_angles:
+  - Le titre du film et le genre (comédie, film d'aventure, film d'amour...)
+  - Où et avec qui vous avez vu ce film
+  - L'histoire du film en quelques mots et le personnage que vous préférez
+  - Pourquoi vous avez aimé ce film (les acteurs, la musique, l'histoire...)
+  - Un autre film que vous voulez voir bientôt

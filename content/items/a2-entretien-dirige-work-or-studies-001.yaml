@@ -1,0 +1,22 @@
+type: question_bank
+id: a2-entretien-dirige-work-or-studies-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - work_or_studies
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - Est-ce que vous travaillez ou est-ce que vous étudiez en ce moment ?
+  - Qu'est-ce que vous faites comme travail, ou qu'est-ce que vous étudiez ?
+  - À quelle heure est-ce que vous commencez le matin ?
+  - Où est-ce que vous travaillez ou étudiez ?
+  - Avec qui est-ce que vous travaillez ou étudiez ? Parlez de vos collègues ou de vos camarades.
+  - Qu'est-ce que vous aimez dans votre travail ou dans vos études ? Pourquoi ?
+  - Qu'est-ce que vous faites à midi, pendant la pause ?
+  - Qu'est-ce que vous voulez faire plus tard, comme travail ou comme études ?

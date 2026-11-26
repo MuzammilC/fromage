@@ -1,0 +1,22 @@
+type: monologue_subject
+id: a2-monologue-suivi-computer-001
+exam_definition: delf-a2-tp@1
+part_key: monologue_suivi
+topics:
+  - computer
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: monologue_subject-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous parlez de l'ordinateur dans votre vie. Vous expliquez quand et pourquoi vous l'utilisez
+  et vous racontez un souvenir avec cet objet.
+suggested_angles:
+  - Quel ordinateur utilisez-vous (à la maison, au travail, portable) ?
+  - Que faites-vous avec votre ordinateur ? (travailler, écrire, regarder des films, parler avec la famille)
+  - Où et quand l'utilisez-vous pendant la semaine ?
+  - Racontez un petit problème ou un bon souvenir avec un ordinateur.
+  - Voulez-vous changer d'ordinateur un jour ? Pourquoi ?

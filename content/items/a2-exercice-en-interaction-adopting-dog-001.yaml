@@ -1,0 +1,55 @@
+type: interaction_situation
+id: a2-exercice-en-interaction-adopting-dog-001
+exam_definition: delf-a2-tp@1
+part_key: exercice_en_interaction
+topics:
+  - adopting_dog
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: interaction_situation-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+candidate_brief:
+  Vous voulez adopter un chien. Vous allez dans un refuge pour animaux et vous parlez à
+  une employée. Vous posez des questions sur le chien, sur ce qu'il faut faire et sur le prix, puis vous
+  décidez si vous l'adoptez.
+examiner_role: Employée d'un refuge pour animaux (Refuge Les Quatre Pattes)
+examiner_only_data:
+  nom_du_refuge: Refuge Les Quatre Pattes
+  chien_presente:
+    nom: Noisette
+    race: croisé labrador
+    sexe: femelle
+    age: 3 ans
+    taille_poids: grande taille, 22 kg
+    caractere: douce, joueuse, aime les enfants et les autres chiens, un peu peureuse pendant les orages
+    sante: vaccinée, identifiée par puce électronique, stérilisée
+    alimentation: croquettes pour chien adulte, deux repas par jour
+    besoins: au moins deux promenades par jour, environ une heure au total
+  frais_adoption: 180 euros (vaccins, puce et stérilisation compris)
+  paiement: carte bancaire, chèque ou espèces
+  documents_demandes:
+    - pièce d'identité
+    - justificatif de domicile de moins de 3 mois
+  demarches:
+    remplir un formulaire d'adoption et signer un contrat d'adoption; une première promenade
+    avec le chien est proposée avant de décider
+  delai_de_reflexion: le chien peut être réservé 48 heures sans payer
+  horaires_du_refuge: du mardi au samedi, de 10 h à 12 h et de 14 h à 17 h; fermé le dimanche et le lundi
+  visite_a_domicile:
+    pas de visite à domicile, mais l'employée demande si le candidat a un jardin ou s'il
+    habite en appartement (les deux sont acceptés)
+  accessoires_vendus_sur_place: laisse (10 euros), collier (8 euros), panier (35 euros), gamelles (6 euros)
+  adresse: 12 chemin des Prés
+  telephone: 01 23 45 67 89
+  rendez_vous_possible: le candidat peut revenir chercher le chien le samedi suivant à 14 h
+expected_speech_acts:
+  - saluer et se présenter poliment
+  - exprimer son souhait d'adopter un chien
+  - poser des questions sur le chien (âge, caractère, santé)
+  - demander le prix et les documents nécessaires
+  - proposer ou accepter un rendez-vous
+  - remercier et prendre congé
+register: formal

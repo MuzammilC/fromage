@@ -1,0 +1,22 @@
+type: question_bank
+id: a2-entretien-dirige-weekend-001
+exam_definition: delf-a2-tp@1
+part_key: entretien_dirige
+topics:
+  - weekend
+status: reviewed
+version: 1
+generation:
+  model: claude-sonnet-5-5
+  prompt_version: question_bank-v1
+  date: "2026-11-25"
+teacher_reviewed: false
+questions:
+  - Qu'est-ce que vous faites le samedi matin en général ?
+  - Vous vous levez à quelle heure le dimanche ?
+  - Est-ce que vous restez à la maison ou est-ce que vous sortez le week-end ?
+  - Avec qui passez-vous votre week-end ?
+  - Quelle est votre activité préférée le week-end ? Pourquoi ?
+  - Est-ce que vous faites le ménage ou les courses le week-end ?
+  - Qu'est-ce que vous avez fait le week-end dernier ?
+  - Quel est pour vous un week-end parfait ?
