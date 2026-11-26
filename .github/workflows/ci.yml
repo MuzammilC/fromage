@@ -23,6 +23,15 @@ jobs:
       - run: pnpm --filter web typecheck
       - run: pnpm test
       - run: uv run --all-packages pytest
+      - run: uv run --all-packages check-items
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: item-check-report
+          path: item-check-report.md
+          if-no-files-found: ignore
 
   supabase:
     runs-on: ubuntu-latest
