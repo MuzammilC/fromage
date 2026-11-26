@@ -1,3 +1,5 @@
+from dataclasses import replace
+
 import pytest
 from fromage_exam_engine import (
     AskExaminer,
@@ -8,9 +10,11 @@ from fromage_exam_engine import (
     EngineConfig,
     EngineError,
     ExamEngine,
+    Medium,
     Phase,
     PhaseChanged,
     Ready,
+    RelanceThresholds,
     SayFixedLine,
     SessionEnded,
     ShowDraw,
@@ -21,7 +25,14 @@ from fromage_exam_engine import (
 P1, P2, P3 = "entretien_dirige", "monologue_suivi", "exercice_en_interaction"
 
 
-def engine_for(a2, items, seed=1, config=None):
+# These tests are about timers, so by default no Relance fires: use `relance=None` to turn it on.
+QUIET = {Medium.TEXT: RelanceThresholds(1e6, 2e6, 3e6, 4e6, listening_end_after=1e6)}
+
+
+def engine_for(a2, items, seed=1, config=None, relance=QUIET):
+    config = config or EngineConfig()
+    if relance is not None:
+        config = replace(config, relance=relance)
     return ExamEngine(a2, items, seed=seed, config=config)
 
 
@@ -36,9 +47,9 @@ def choose_all(engine, at=0.0):
     return effects
 
 
-def at_part(a2, items, part, seed=1):
+def at_part(a2, items, part, seed=1, config=None, relance=QUIET):
     """An engine at the start of `part`, with the Candidate having chosen the first card of each Draw."""
-    engine = engine_for(a2, items, seed)
+    engine = engine_for(a2, items, seed, config, relance)
     engine.start(0.0)
     choose_all(engine)
     engine.handle(Tick(600.0))  # Prep Time ends: Part 1 starts at 600

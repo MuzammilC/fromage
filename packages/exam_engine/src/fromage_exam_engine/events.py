@@ -46,10 +46,17 @@ class CandidateDone:
 
 
 @dataclass(frozen=True)
+class ExaminerDone:
+    """The Examiner finished asking its question. Relance counts silence from this moment."""
+
+    at: float
+
+
+@dataclass(frozen=True)
 class Tick:
     """Time has passed. Send one whenever `ExamEngine.next_deadline` is reached."""
 
     at: float
 
 
-Event = ChoseItem | Ready | CandidateTurn | CandidateActivity | CandidateDone | Tick
+Event = ChoseItem | Ready | CandidateTurn | CandidateActivity | CandidateDone | ExaminerDone | Tick

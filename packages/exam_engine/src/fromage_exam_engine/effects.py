@@ -66,7 +66,8 @@ class ExaminerItem:
     register: str | None = None
 
 
-AskReason = Literal["opening", "candidate_turn", "follow_up"]
+AskReason = Literal["opening", "candidate_turn", "follow_up", "reformulate", "next_question"]
+"""`reformulate` is Relance step 3. `next_question` follows a question left unanswered."""
 
 
 @dataclass(frozen=True)
@@ -82,8 +83,39 @@ class AskExaminer:
 
 
 @dataclass(frozen=True)
+class RepeatQuestion:
+    """Relance step 1: say the Examiner's last question again, word for word."""
+
+    part: str
+
+
+@dataclass(frozen=True)
+class SimplifyQuestion:
+    """Relance step 2: say the question again more simply. In text, a shorter sentence."""
+
+    part: str
+
+
+@dataclass(frozen=True)
+class QuestionUnanswered:
+    """Relance step 4: the Candidate let the question go. Save it as Evidence for the task."""
+
+    part: str
+
+
+@dataclass(frozen=True)
 class SessionEnded:
     reason: Literal["completed"]
 
 
-Effect = PhaseChanged | ShowDraw | SayFixedLine | WrapUpAllowed | AskExaminer | SessionEnded
+Effect = (
+    PhaseChanged
+    | ShowDraw
+    | SayFixedLine
+    | WrapUpAllowed
+    | AskExaminer
+    | RepeatQuestion
+    | SimplifyQuestion
+    | QuestionUnanswered
+    | SessionEnded
+)
